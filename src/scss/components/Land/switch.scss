@@ -1,0 +1,109 @@
+$background-color_1: #888888;
+$background-color_2: #f1f1f1;
+$background-color_3: #fff;
+$background-color_4: #000000;
+$background-color_5: #9effb2;
+
+.switch,
+.switch-panoram {
+    visibility: hidden;
+    position: absolute;
+
+    + {
+        label {
+            display: block;
+            position: relative;
+            cursor: pointer;
+            outline: none;
+            user-select: none;
+        }
+    }
+    &__container {
+        width: 120px;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    &__shadow {
+        + {
+            label {
+                padding: 2px;
+                width: 120px;
+                height: 60px;
+                border-radius: 60px;
+                border: 2px solid #ad937b;
+                &:before {
+                    display: block;
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    bottom: 0px;
+                    content: "";
+                    right: 0px;
+                    background-color: $background-color_2;
+                    border-radius: 60px;
+                    transition: background 0.4s;
+                }
+                &:after {
+                    display: block;
+                    position: absolute;
+                    content: "";
+                    top: 0px;
+                    left: 0px;
+                    bottom: 0px;
+                    height: 56px;
+                    width: 56px;
+                    background: url("/images/icons/mount.png") 100% 100%/100% 100% no-repeat;
+                    border-radius: 100%;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+                    transition: all 0.4s;
+                }
+            }
+        }
+        &:checked {
+            + {
+                label {
+                    &:before {
+                        background-color: $background-color_4;
+                        border-color: black;
+                    }
+                    &:after {
+                        background: url("/images/icons/mine.png") 100% 100%/100% 100% no-repeat;
+                        background-color: $background-color_1;
+                        transform: translateX(60px);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.switch-panoram {
+    &__container {
+        top: -5rem;
+        left: 0;
+    }
+    &__shadow {
+        + {
+            label {
+                &:after {
+                    background: url("/images/icons/layers.png") 50% 50%/75% 75% no-repeat;
+                }
+            }
+        }
+        &:checked {
+            + {
+                label {
+                    &:before {
+                        background-color: $background-color_5;
+                        border-color: black;
+                    }
+                    &:after {
+                        background: url("/images/icons/3d-cube.png") 50% 50%/75% 75% no-repeat;
+                        background-color: $background-color_3;
+                    }
+                }
+            }
+        }
+    }
+}

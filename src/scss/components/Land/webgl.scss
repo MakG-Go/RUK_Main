@@ -1,0 +1,68 @@
+.main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+    width: 100dvw;
+    height: 100dvh;
+    clip-path: circle(100%);
+    transition-property: clip-path, height, left, top;
+    transition-duration: 0.8s;
+    transition-timing-function: ease-in-out;
+    z-index: 0;
+    opacity: 0;
+
+    &.active {
+        left: -20vw;
+        @media screen and (max-width: 768px) {
+            // top: -15vh;
+            left: 0;
+        }
+    }
+    &__wrapper {
+        position: relative;
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
+        background: radial-gradient(circle, #ad937b 0%, #000000 100%);
+    }
+
+    &__btn {
+        &_prev {
+            position: absolute;
+            left: 0;
+        }
+        &_next {
+            position: absolute;
+            right: 0;
+        }
+    }
+}
+
+.preloader {
+    transform: scale(0);
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    z-index: 99;
+    top: calc(50% - 80px);
+    overflow: hidden;
+    transition-property: transform;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-in-out;
+    &.active {
+        transform: scale(1);
+    }
+    &_percent {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        display: flex;
+        color: white;
+        justify-content: center;
+        line-height: 0;
+    }
+}

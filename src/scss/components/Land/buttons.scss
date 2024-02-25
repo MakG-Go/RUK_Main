@@ -1,0 +1,11 @@
+.mine {
+    &_btn {
+        position: relative;
+        padding: 0.5rem;
+        border-radius: 5px;
+        background-color: #193f45;
+        z-index: 1;
+        color: white;
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,87 @@
+.controller {
+    &__wrapper {
+        justify-content: space-between;
+        margin: 0 2em;
+        z-index: 2;
+        display: flex;
+        position: absolute;
+        bottom: 50%;
+        left: 0;
+        right: 0;
+    }
+    &__container {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__btn {
+        position: absolute;
+        top: -5rem;
+        padding: 1rem;
+        border-radius: 10px;
+        border: 2px solid white;
+        background-color: #ad937b;
+    }
+
+    &__select {
+        padding: 1rem;
+        border: 2px solid #ad937b;
+        border-radius: 10px;
+        outline: none;
+        cursor: pointer;
+
+        option {
+            cursor: pointer;
+        }
+
+        &_container {
+            position: absolute;
+            top: 5rem;
+            left: 0rem;
+            transition-property: transform;
+            transition-duration: 0.35s;
+            transition-timing-function: ease-in-out;
+
+            &.active {
+                transform: translateY(-5rem);
+            }
+        }
+    }
+}
+
+/* TRANSITION ANIMATION*/
+
+.controllers-enter-active,
+.controllers-leave-active {
+    transition: 0.5s;
+}
+
+.controllers-enter-from {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+}
+
+.controllers-leave-to {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+}
+
+.selecters-enter-active,
+.selecters-leave-active {
+    transition: 0.25s;
+}
+
+.selecters-enter-from {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+}
+
+.selecters-leave-to {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+}
