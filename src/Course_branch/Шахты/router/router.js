@@ -32,28 +32,35 @@ export default createRouter({
                 ease: "Sine.easeOut",
             },
         });
+
         let container = document.querySelector('.js-global-scroll')
+        switch (container) {
+            case container != null:
+                if (to.hash) {
+                    return new Promise((resolve, reject) => {
 
-        if (to.hash) {
-            return new Promise((resolve, reject) => {
+                        setTimeout(() => {
+                            let el = document.getElementById(to.hash.substring(1))
+                            resolve(
+                                tl_1.to(container, {
+                                    scrollTop: el.offsetTop - headerHeight,
+                                    duration: 1,
+                                })
+                            )
+                        }, time)
+                    })
 
-                setTimeout(() => {
-                    let el = document.getElementById(to.hash.substring(1))
-                    resolve(
-                        tl_1.to(container, {
-                            scrollTop: el.offsetTop - headerHeight,
-                            duration: 1,
-                        })
-                    )
-                }, time)
-            })
+                } else {
+                    return tl_1.to(container, {
+                        scrollTop: 0,
+                        duration: 0.1,
+                    });;
+                };
 
-        } else {
-            return tl_1.to(container, {
-                scrollTop: 0,
-                duration: 0.1,
-            });;
+            case container == null:
+                break;
         }
+
     },
 })
 

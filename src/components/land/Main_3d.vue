@@ -721,16 +721,4 @@ export default {
 </template>
 
 <style scoped>
-.tooltip {
-    position: absolute;
-    pointer-events: none;
-    background-color: rgba(145, 152, 215, 0.8);
-    color: white;
-    padding: 5px;
-    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-    border-radius: 3px;
-    font-weight: 600;
-    font-size: 25px;
-    z-index: 3;
-}
 </style>

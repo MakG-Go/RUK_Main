@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import SvgIcon from "./ui/SvgIcon.vue";
+import SvgIcon from "../ui/SvgIcon.vue";
 import { mapGetters } from "vuex";
 export default {
     components: {

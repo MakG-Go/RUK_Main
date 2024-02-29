@@ -1,22 +1,17 @@
 <template>
     <div>
-        <ul class="menu__nav-content">
-            <perfect-scrollbar class="menu__scroll">
-                <li
-                    v-for="(page, titleKey) in menu"
-                    :key="page.getRoutParams"
-                    class="menu__nav-title"
-                    :class="getActivTitleClass(titleKey)"
-                    :style="getLinksAnimate(titleKey)"
-                >
-                    <router-link
-                        @click="toggleMenu"
-                        :to="{ name: page.pageRoute }"
-                    >
-                        <p class="menu__nav-title_item">
-                            <span>{{ page.name }}</span>
-                        </p>
+        <perfect-scrollbar class="menu__scroll">
+            <ul class="menu__nav-content">
+                <li v-for="(page, titleKey) in menu" :key="page.getRoutParams">
+                    <router-link @click="toggleMenu" :to="{ name: page.pageRoute }">
+                        <article class="menu__nav-card" :class="getActivTitleClass(titleKey)" :style="getLinksAnimate(titleKey)">
+                            <div class="menu__nav-card_image">
+                                <img :src="page.image" alt="">
+                            </div>
+                            <p class="text-m">{{ page.name }}</p>
+                        </article>
                     </router-link>
+                    <!--                     
                     <div v-if="page.scrollPage">
                         <ul class="menu__nav-submenu">
                             <li
@@ -39,17 +34,19 @@
                                 </router-link>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </li>
-            </perfect-scrollbar>
-        </ul>
+            </ul>
+        </perfect-scrollbar>
     </div>
 </template>
 
 <script>
+
 import { mapGetters, mapActions, mapState } from "vuex";
 
 export default {
+    name: "Menu",
     methods: {
         ...mapActions("header", ["toggleMenu"]),
     },
@@ -87,15 +84,12 @@ export default {
             };
         },
     },
+    mounted(){
+
+        console.log(this.menu[0].image)
+    }
 };
 </script>
 
-<style lang="scss" scoped>
-.menu {
-    // &__scroll {
-    //     height: calc(50vh - 5px);
-    //     padding-right: 3rem;
-    // }
-}
-</style>
+<style lang="scss" scoped></style>
 

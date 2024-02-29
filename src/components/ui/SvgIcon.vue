@@ -4,10 +4,12 @@
     </svg>
 </template>
   
-  <script>
+<script>
+/** For composition API */
 import { defineComponent, computed } from "vue";
 
-export default defineComponent({
+export default {
+
     name: "SvgIcon",
     props: {
         prefix: {
@@ -29,15 +31,57 @@ export default defineComponent({
             type: String,
         },
     },
-    setup(props) {
-        const symbolId = computed(() => `#${props.prefix}-${props.name}`);
-        const size = computed(() => {
-            return {
-                width: `${parseInt(props.w)}px`,
-                height: `${parseInt(props.h)}px`,
-            };
-        });
-        return { symbolId, size };
+
+    data() {
+        return {
+        }
     },
-});
+    computed: {
+        symbolId() {
+            return `#${this.prefix}-${this.name}`
+        },
+        size() {
+            return {
+                width: `${parseInt(this.w)}px`,
+                height: `${parseInt(this.h)}px`,
+            };
+        }
+    }
+
+}
+
+/** For composition API */
+// export default defineComponent({
+//     name: "SvgIcon",
+//     props: {
+//         prefix: {
+//             type: String,
+//             default: "icon",
+//         },
+//         name: {
+//             type: String,
+//             required: true,
+//         },
+//         color: {
+//             type: String,
+//             default: "#333",
+//         },
+//         w: {
+//             type: String,
+//         },
+//         h: {
+//             type: String,
+//         },
+//     },
+//     setup(props) {
+//         const symbolId = computed(() => `#${props.prefix}-${props.name}`);
+//         const size = computed(() => {
+//             return {
+//                 width: `${parseInt(props.w)}px`,
+//                 height: `${parseInt(props.h)}px`,
+//             };
+//         });
+//         return { symbolId, size };
+//     },
+// });
 </script>

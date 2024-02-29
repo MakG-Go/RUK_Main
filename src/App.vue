@@ -7,13 +7,14 @@
         <!-- Контейнер глобального scrollbar -->
 
         <perfect-scrollbar
-            v-show="start"
+            v-if="start"
             ref="globalScroll"
             @ps-scroll-y="onGlobalScroll"
             class="js-global-scroll"
         >
             <div class="wrapper" :class="getMainWrapper">
-                <div class="container-full">
+                
+                <div class="container">
                     <!-- Меню/Хедер -->
 
                     <Header> </Header>
@@ -30,6 +31,7 @@
                                 :is="Component"
                                 :key="$route.path"
                             ></component>
+
                         </transition>
                     </router-view>
 
@@ -43,12 +45,13 @@
                 </div>
             </div>
         </perfect-scrollbar>
+
     </div>
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
-import NavigationButton from "@/components/NavigationButton.vue";
+import Header from "@/components/menu/Header.vue";
+import NavigationButton from "@/components/menu/NavigationButton.vue";
 import Splash from "&/views/Splash.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
@@ -121,5 +124,6 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+
 </style>
