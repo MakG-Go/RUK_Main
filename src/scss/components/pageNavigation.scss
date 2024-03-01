@@ -1,0 +1,99 @@
+.page-navigation {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 2rem;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    justify-content: center;
+
+
+    &__item {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5em;
+        background-color: $white;
+        border: 1px solid transparent;
+        border-radius: 50px;
+        max-width: 24px;
+        height: 24px;
+        width: 24px;
+        overflow: hidden;
+        box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.12);
+
+        transition-property: width, max-width, background-color, justify-content, border-color;
+        transition-duration: 0.25s;
+        transition-timing-function: ease-in-out;
+        pointer-events: none;
+
+        &.active{
+            border-color: $blue_1;
+            pointer-events: all;
+            cursor: pointer;
+        }
+
+        &::before {
+            position: absolute;
+            content: '';
+
+            top: 6px;
+            left: 6px;
+
+
+            width: 10px;
+            height: 10px;
+            background-color: #ABA4B5;
+            border-radius: 100%;
+
+            transition-property: background-color;
+            transition-duration: 0.25s;
+            transition-timing-function: ease-in-out;
+        }
+
+        @media(hover:hover) {
+            &:hover {
+                width: 350px;
+                max-width: 350px;
+                background-color: $blue_1;
+
+                &::before {
+                    background-color: $white;
+                }
+
+                .page-navigation__text {
+                    color: $white;
+                }
+            }
+        }
+    }
+
+    &__text {
+        font-size: 0.875rem;
+        white-space: nowrap;
+        margin-left: 2rem;
+        color: $white;
+        transition-property: color;
+        transition-duration: 0.25s;
+        transition-timing-function: ease-in-out;
+    }
+
+    &__line {
+        position: relative;
+        width: 24px;
+        height: 32px;
+
+        &::before {
+            position: absolute;
+            content: '';
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: 2px;
+            height: 100%;
+            background-color: $blue_1;
+        }
+    }
+}

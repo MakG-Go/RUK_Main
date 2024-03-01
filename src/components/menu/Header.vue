@@ -23,7 +23,7 @@
                         <component :is="activeComponent" v-if="activeComponent" />
                     </transition>
                 </div>
-                <button class="menu__close" @click="toggleMenu">
+                <button class="menu__close" @click="closeMenu">
                     <SvgIcon name="close"></SvgIcon>
                 </button>
             </div>
@@ -83,6 +83,11 @@ export default {
             });
             this.activeComponent = this.navButtons[num].component;
         },
+        closeMenu(){
+            this.toggleMenu();
+            this.activeComponent = shallowRef(Menu)
+
+        }
 
     },
 

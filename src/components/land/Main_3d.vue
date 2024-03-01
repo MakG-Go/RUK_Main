@@ -15,6 +15,7 @@ import {
     PANORAM_PARAMS,
 } from "&/courseData/mainData.js";
 import { CreateModel } from "@/scripts/model_constructor.js";
+import MainPreloader from '@/components/land/Preloader.vue'
 
 import _ from "lodash";
 // import { acceleratedRaycast } from "three-mesh-bvh";
@@ -30,10 +31,13 @@ import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPa
 
 export default {
     name: "Main",
+    components: {
+        MainPreloader
+    },
 
     props: {
         modelsData: { type: Array, required: true },
-        currentLaer: { type: Object, default: () => {} },
+        currentLaer: { type: Object, default: () => { } },
         selected: { type: String, default: null },
         descripton: { type: Boolean, default: false },
         panoram: { type: Boolean, default: false },
@@ -43,6 +47,7 @@ export default {
         return {
             meshes: [],
             loadPercetn: 0,
+            loadComplite: false,
             originalColors: new Map(),
 
             startTargetCamera: new THREE.Vector3(
@@ -170,6 +175,25 @@ export default {
             this.envMapIntensity = 7;
         },
 
+        getCanvasSize() {
+
+            this.getSizes.width = window.innerWidth;
+            this.getSizes.height = window.innerHeight;
+
+            // Update camera
+            this.camera.aspect = this.getSizes.width / this.getSizes.height;
+            this.camera.updateProjectionMatrix();
+
+            // Update renderer
+            this.renderer.setSize(
+                this.getSizes.width,
+                this.getSizes.height
+            );
+            this.renderer.setPixelRatio(
+                Math.min(window.devicePixelRatio, 2)
+            );
+        },
+
         /** POSTPROCESSING */
 
         createPostProcess() {
@@ -246,9 +270,9 @@ export default {
                         opacity: 1,
                     });
                     this.$emit("model-loaded", true);
-
-                    this.$refs.preloader.classList.remove("active");
-                    this.loadPercetn = 0;
+                    this.loadComplite = true
+                    // this.$refs.preloader.classList.remove("active");
+                    // this.loadPercetn = 0;
                     // console.log("Loaded");
                 },
                 (itemUrl, itemsLoaded, itemsTotal) => {
@@ -461,7 +485,7 @@ export default {
 
         destroyScene() {
             gsap.killTweensOf(this.targetCamera);
-            window.removeEventListener("resize", this.resize);
+            window.removeEventListener("resize", this.getCanvasSize, false);
 
             this.meshes.forEach((mesh) => {
                 mesh.traverse((child) => {
@@ -499,6 +523,7 @@ export default {
             this.renderer = null;
             this.camera = null;
             this.scene = null;
+            this.loadPercetn = 0
         },
 
         destroyModel() {
@@ -547,27 +572,6 @@ export default {
                 : "";
 
             requestAnimationFrame(this.tick);
-        },
-
-        resize() {
-            window.addEventListener("resize", () => {
-                // Update sizes
-                this.getSizes.width = window.innerWidth;
-                this.getSizes.height = window.innerHeight;
-
-                // Update camera
-                this.camera.aspect = this.getSizes.width / this.getSizes.height;
-                this.camera.updateProjectionMatrix();
-
-                // Update renderer
-                this.renderer.setSize(
-                    this.getSizes.width,
-                    this.getSizes.height
-                );
-                this.renderer.setPixelRatio(
-                    Math.min(window.devicePixelRatio, 2)
-                );
-            });
         },
 
         createGuiParams() {
@@ -688,7 +692,7 @@ export default {
         this.canvas = this.$refs.webGl;
         this.tooltip = this.$refs.tooltip;
         this.init();
-        this.resize();
+        window.addEventListener("resize", this.getCanvasSize, false);
         this.tick();
         this.controls.autoRotate = true;
     },
@@ -700,25 +704,15 @@ export default {
     unmounted() {
         cancelAnimationFrame(this.animationFrameId);
     },
+
 };
 </script>
 
 <template >
     <div @click="stopStartAutoRotate">
-        <div ref="preloader" class="lds-roller preloader active">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <p class="preloader_percent">{{ loadPercetn }}%</p>
-        </div>
+        <MainPreloader :current-procent="loadPercetn" :load-complite="loadComplite"></MainPreloader>
         <div ref="webGl" class="main" :class="getActiveClass"></div>
     </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

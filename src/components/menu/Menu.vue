@@ -10,31 +10,7 @@
                             </div>
                             <p class="text-m">{{ page.name }}</p>
                         </article>
-                    </router-link>
-                    <!--                     
-                    <div v-if="page.scrollPage">
-                        <ul class="menu__nav-submenu">
-                            <li
-                                v-for="(
-                                    subScroll, subTitleKey
-                                ) in page.scrollPage"
-                                class="menu__nav-subtitle"
-                                :class="
-                                    getActivSubtitleClass(titleKey, subTitleKey)
-                                "
-                                :key="subScroll.name"
-                            >
-                                <router-link
-                                    @click="toggleMenu"
-                                    :to="{
-                                        name: page.pageRoute,
-                                        hash: subScroll.hash,
-                                    }"
-                                    ><span>{{ subScroll.name }}</span>
-                                </router-link>
-                            </li>
-                        </ul>
-                    </div> -->
+                    </router-link>              
                 </li>
             </ul>
         </perfect-scrollbar>
@@ -61,8 +37,8 @@ export default {
                     }).then((result) => result);
                     return {
                         opacity: "1",
-                        // transform: "translateY(0)",
-                        // "transition-delay": 0.15 + Number(id * 0.1) + "s",
+                        transform: "translateY(0)",
+                        "transition-delay": 0.15 + Number(id * 0.1) + "s",
                     };
                 }
             };

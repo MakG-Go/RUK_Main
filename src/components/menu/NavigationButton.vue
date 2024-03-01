@@ -1,5 +1,5 @@
 <template>
-    <div class="navigation-buttons" :class="getWebGlNavPosition">
+    <div class="navigation-buttons" v-show="!getWebGlNavPosition">
         <router-link class="nav-btn" :to="{ name: goPrev }">
             <SvgIcon name="prev"></SvgIcon
         ></router-link>
@@ -39,10 +39,9 @@ export default {
             }
         },
         getWebGlNavPosition() {
-            return {
-                "navigation-buttons_webGl":
-                    this.$route.name === "tutorial-page",
-            };
+         
+               return this.$route.name === "tutorial-page"
+        
         },
     },
 };

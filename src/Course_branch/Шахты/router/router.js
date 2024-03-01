@@ -1,7 +1,8 @@
 
-import { createRouter, createWebHashHistory } from "vue-router"
-import tutorial from '&/views/Tutorial.vue'
-import final from '&/views/Final.vue'
+import { createRouter, createWebHashHistory } from "vue-router";
+import tutorial from '&/views/Tutorial.vue';
+import final from '&/views/Final.vue';
+import Page_1 from "&/views/pages/Page_1.vue";
 import { gsap } from 'gsap';
 
 
@@ -9,6 +10,7 @@ import { gsap } from 'gsap';
 const routes = [
     { path: '/', name: 'tutorial-page', component: tutorial, props: true },
     { path: '/final', name: 'final', component: final, props: true },
+    { path: '/Page_1', name: 'Page_1', component: Page_1, props: true },
 
 ]
 
@@ -34,32 +36,28 @@ export default createRouter({
         });
 
         let container = document.querySelector('.js-global-scroll')
-        switch (container) {
-            case container != null:
-                if (to.hash) {
-                    return new Promise((resolve, reject) => {
+        if(container === null) return
 
-                        setTimeout(() => {
-                            let el = document.getElementById(to.hash.substring(1))
-                            resolve(
-                                tl_1.to(container, {
-                                    scrollTop: el.offsetTop - headerHeight,
-                                    duration: 1,
-                                })
-                            )
-                        }, time)
-                    })
+        if (to.hash) {
+            return new Promise((resolve, reject) => {
 
-                } else {
-                    return tl_1.to(container, {
-                        scrollTop: 0,
-                        duration: 0.1,
-                    });;
-                };
+                setTimeout(() => {
+                    let el = document.getElementById(to.hash.substring(1))
+                    resolve(
+                        tl_1.to(container, {
+                            scrollTop: el.offsetTop - headerHeight,
+                            duration: 1,
+                        })
+                    )
+                }, time)
+            })
 
-            case container == null:
-                break;
-        }
+        } else {
+            return tl_1.to(container, {
+                scrollTop: 0,
+                duration: 0.1,
+            });;
+        };
 
     },
 })

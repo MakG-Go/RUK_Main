@@ -41,14 +41,17 @@
 
 .nav-btn {
     display: flex;
-    padding: 0.909em 2.272em;
+    padding: 1rem;
     justify-content: center;
     align-items: center;
-    border-radius: 3.636em;
+    border-radius:100%;
     border: 2px solid #393e42;
     transition-property: border-color;
     transition-duration: 0.25s;
     transition-timing-function: ease;
+
+            background-color: white;
+
     &:first-child {
         margin-right: 0.681em;
     }
@@ -56,6 +59,7 @@
     svg {
         width: 1.636em;
         height: 1.363em;
+
         use {
             transition-property: fill;
             transition-duration: 0.25s;
@@ -63,11 +67,14 @@
             fill: #393e42;
         }
     }
+
     &:focus {
         outline: unset;
     }
+
     &:hover {
         border-color: rgba(#393e42, 0.6);
+
         svg {
             use {
                 fill: rgba(#393e42, 0.6);

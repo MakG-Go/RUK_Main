@@ -7,7 +7,13 @@ export const courseMenu =
         /** Обычный роут */
         { pageRoute: "final", name: "Заключение", image: `${MENU_IMAGES}img-2.jpg` },
 
-        { pageRoute: "final", name: "Слайд 1", image: `${MENU_IMAGES}img-2.jpg` },
+        {
+            pageRoute: "Page_1", name: "Слайд 1", image: `${MENU_IMAGES}img-2.jpg`,
+            scrollPage: [
+                { pageRoute: "Page_1", hash: "#menu-Part_1", name: "Часть 1" },
+                { pageRoute: "Page_1", hash: "#menu-Part_2", name: "Часть 2" }
+            ]
+        },
         { pageRoute: "final", name: "Слайд 2", image: `${MENU_IMAGES}img-2.jpg` },
         { pageRoute: "final", name: "Слайд 3", image: `${MENU_IMAGES}img-2.jpg` },
     ]
