@@ -1,7 +1,8 @@
 
-import { createRouter, createWebHashHistory } from "vue-router"
-import tutorial from '&/views/Tutorial.vue'
-import final from '&/views/Final.vue'
+import { createRouter, createWebHashHistory } from "vue-router";
+import tutorial from '&/views/Tutorial.vue';
+import final from '&/views/Final.vue';
+import Page_1 from "&/views/pages/Page_1.vue";
 import { gsap } from 'gsap';
 
 
@@ -9,6 +10,7 @@ import { gsap } from 'gsap';
 const routes = [
     { path: '/', name: 'tutorial-page', component: tutorial, props: true },
     { path: '/final', name: 'final', component: final, props: true },
+    { path: '/Page_1', name: 'Page_1', component: Page_1, props: true },
 
 ]
 
@@ -32,7 +34,9 @@ export default createRouter({
                 ease: "Sine.easeOut",
             },
         });
+
         let container = document.querySelector('.js-global-scroll')
+        if(container === null) return
 
         if (to.hash) {
             return new Promise((resolve, reject) => {
@@ -53,7 +57,8 @@ export default createRouter({
                 scrollTop: 0,
                 duration: 0.1,
             });;
-        }
+        };
+
     },
 })
 

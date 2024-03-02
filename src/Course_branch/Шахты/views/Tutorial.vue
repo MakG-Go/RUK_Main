@@ -1,5 +1,100 @@
+<script >
+import Main from "@/components/land/Main_3d.vue";
+import description from "@/components/land/Description.vue";
+import {
+    LAERS_SWITCH_PROPS,
+    MODELS_SWITCH_PROPS,
+} from "&/courseData/mainData.js";
+export default {
+    components: {
+        Main,
+        description,
+    },
+    data() {
+        return {
+            panoram: false,
+            show: false,
+            loaded: false,
+            switchLaer: false,
+            models: [
+                {
+                    model: "models/mine.glb",
+                    scale: 1,
+                    position: { x: 0, y: 0, z: 0 },
+                    name: "Mine",
+                    startDiscription: "Слой 1",
+                },
+            ],
+            selected: null,
+            descriptionData: null,
+        };
+    },
+    methods: {
+        switchLaers() {
+            this.switchLaer = !this.switchLaer;
+            this.selected = null;
+            this.show = false;
+        },
+
+        switchSelect(e) {
+            this.show = true;
+            this.selected = e.target.value;
+            this.descriptionData =
+                MODELS_SWITCH_PROPS[this.selected].description;
+        },
+
+        modelLoaded(state) {
+            this.loaded = state;
+        },
+
+        closeDescripton() {
+            this.show = false;
+            this.selected = null;
+        },
+        showPanoram() {
+            this.panoram = !this.panoram;
+        },
+    },
+    computed: {
+        getCurrentLaer() {
+            if (!this.switchLaer) {
+                return LAERS_SWITCH_PROPS.top;
+            }
+            return LAERS_SWITCH_PROPS.bottom;
+        },
+
+        getSelectibleObject() {
+            if (!this.switchLaer) {
+                return LAERS_SWITCH_PROPS.top.models;
+            }
+            return LAERS_SWITCH_PROPS.bottom.models;
+        },
+        getModelName() {
+            return (name) => {
+                return MODELS_SWITCH_PROPS[name].description.title;
+            };
+        },
+        getSelectAnimate() {
+            if (this.show) {
+                return "active";
+            }
+
+            return;
+        },
+    },
+    beforeUnmount() {
+        this.show = false;
+        this.loaded = false;
+        this.switchLaer = false;
+        this.selected = null;
+        this.descriptionData = null;
+    },
+};
+</script>
+
 <template>
     <div>
+        
         <Main
             :models-data="models"
             :descripton="show"
@@ -95,102 +190,10 @@
                 </div>
             </div>
         </Transition>
+
     </div>
 </template>
 
-<script >
-import Main from "@/components/land/Main_3d.vue";
-import description from "@/components/land/Description.vue";
-import {
-    LAERS_SWITCH_PROPS,
-    MODELS_SWITCH_PROPS,
-} from "&/courseData/mainData.js";
-export default {
-    components: {
-        Main,
-        description,
-    },
-    data() {
-        return {
-            panoram: false,
-            show: false,
-            loaded: false,
-            switchLaer: false,
-            models: [
-                {
-                    model: "models/mine.glb",
-                    scale: 1,
-                    position: { x: 0, y: 0, z: 0 },
-                    name: "Mine",
-                    startDiscription: "Слой 1",
-                },
-            ],
-            selected: null,
-            descriptionData: null,
-        };
-    },
-    methods: {
-        switchLaers() {
-            this.switchLaer = !this.switchLaer;
-            this.selected = null;
-            this.show = false;
-        },
-
-        switchSelect(e) {
-            this.show = true;
-            this.selected = e.target.value;
-            this.descriptionData =
-                MODELS_SWITCH_PROPS[this.selected].description;
-        },
-
-        modelLoaded(state) {
-            this.loaded = state;
-        },
-
-        closeDescripton() {
-            this.show = false;
-            this.selected = null;
-        },
-        showPanoram() {
-            this.panoram = !this.panoram;
-        },
-    },
-    computed: {
-        getCurrentLaer() {
-            if (!this.switchLaer) {
-                return LAERS_SWITCH_PROPS.top;
-            }
-            return LAERS_SWITCH_PROPS.bottom;
-        },
-
-        getSelectibleObject() {
-            if (!this.switchLaer) {
-                return LAERS_SWITCH_PROPS.top.models;
-            }
-            return LAERS_SWITCH_PROPS.bottom.models;
-        },
-        getModelName() {
-            return (name) => {
-                return MODELS_SWITCH_PROPS[name].description.title;
-            };
-        },
-        getSelectAnimate() {
-            if (this.show) {
-                return "active";
-            }
-
-            return;
-        },
-    },
-    beforeUnmount() {
-        this.show = false;
-        this.loaded = false;
-        this.switchLaer = false;
-        this.selected = null;
-        this.descriptionData = null;
-    },
-};
-</script>
 
 <style scoped>
 </style>

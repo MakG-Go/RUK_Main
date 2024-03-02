@@ -4,15 +4,15 @@ export default {
     namespaced: true,
     state: {
         open: false,
-        menu: courseMenu(),
-        glossary: courseGlossary(),
-        downloads: courceDownload()
+        menu: courseMenu,
+        glossary: courseGlossary,
+        downloads: courceDownload
 
     },
     getters: {
-        menu: (state) => state.menu.routs,
-        glossary: (state) => state.glossary.data,
-        downloads: (state) => state.downloads.data,
+        menu: (state) => state.menu,
+        glossary: (state) => state.glossary,
+        downloads: (state) => state.downloads,
         menuState: (state) => state.open,
         curentPage: (state) => (name) => state.menu.routs.findIndex((el) => el.pageRoute === name)
 

@@ -1,3 +1,19 @@
+<script>
+import { mapActions, mapGetters } from "vuex";
+import SvgIcon from "@/components/ui/SvgIcon.vue";
+export default {
+    components: {
+        SvgIcon,
+    },
+    computed: {
+        ...mapGetters("status", ["start"]),
+    },
+    methods: {
+        ...mapActions("status", ["getStart"]),
+    },
+};
+</script>
+
 <template>
     <div class="splash">
         <div class="container-full">
@@ -35,22 +51,6 @@
         </div>
     </div>
 </template>
-
-<script>
-import { mapActions, mapGetters } from "vuex";
-import SvgIcon from "@/components/ui/SvgIcon.vue";
-export default {
-    components: {
-        SvgIcon,
-    },
-    computed: {
-        ...mapGetters("status", ["start"]),
-    },
-    methods: {
-        ...mapActions("status", ["getStart"]),
-    },
-};
-</script>
 
 <style lang="scss">
 </style>

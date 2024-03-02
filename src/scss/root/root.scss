@@ -1,7 +1,7 @@
 body {
     font-family: $Regular;
     font-size: 22px;
-    background-color: #ececee;
+    background-color: transparent;
 
     @media screen and (max-width: 719px) {
         font-size: 18px;
@@ -25,7 +25,7 @@ hr {
 }
 
 .wrapper {
-    padding: 2.5em 0;
+    height: 100dvh;
     transition-property: background-color;
     transition-duration: 0.25s;
     transition-timing-function: ease-in-out;
@@ -34,39 +34,54 @@ hr {
     }
 }
 
-.container,
-.container-full {
-    margin: 0 auto;
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100dvh - 9rem);
+    margin: 4.5rem auto;
     padding: 0 1rem;
+
     @media screen and (min-width: 576px) {
         max-width: 540px;
+      
     }
     @media screen and (min-width: 768px) {
         max-width: 720px;
-        padding: 0;
+     
+       
     }
     @media screen and (min-width: 992px) {
         max-width: 960px;
+   
+    }
+    @media screen and (min-width: 1100px) {
+        max-width: 1280px;
+        padding: 0 5rem;
+    }
+
+    &__main{
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
     }
 }
 
-.container-full {
-    min-height: calc(100vh - 6em);
-    display: flex;
-    flex-direction: column;
-    @media screen and (max-width: 768px) {
-        min-height: calc(100vh - 3rem);
-    }
-}
+// .container {
 
-.container {
-    &-full {
-        width: 100%;
-        @media screen and (min-width: 1400px) {
-            max-width: 1280px;
-        }
-    }
-}
+//     &-full {
+//         display: flex;
+//         flex-direction: column;
+//         width: 100%;
+//         min-height: calc(100vh - 6em);
+
+//         @media screen and (max-width: 768px) {
+//             min-height: calc(100vh - 3rem);
+//         }
+//         @media screen and (min-width: 1400px) {
+//             max-width: 1280px;
+//         }
+//     }
+// }
 
 .h {
     &-100 {
@@ -103,6 +118,12 @@ hr {
 
 .absolute {
     position: absolute;
+}
+
+.cursor {
+    &-default{
+        cursor: default;
+    }
 }
 
 @media #{$breakpoint-lg-only} {

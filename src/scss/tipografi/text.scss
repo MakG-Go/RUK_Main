@@ -2,23 +2,43 @@
     &-white {
         color: $white;
     }
+
     &-red {
         color: $red;
     }
+
     &-gray {
         color: $gray;
     }
+
     &-uppercase {
         text-transform: uppercase;
     }
+
     &-center {
         text-align: center;
     }
+
     &-left {
         text-align: left;
     }
+
     &-right {
         text-align: right;
+    }
+
+    &-m {
+        font-size: clamp(0.875rem, 10vw - 1rem, 1rem);
+        &--fix{
+            font-size: 1rem;
+        }
+    }
+
+    &-s {
+        font-size: clamp(0.75rem, 10vw - 1rem, 0.875rem);
+        &--fix{
+            font-size: 0.875rem;
+        }
     }
 }
 

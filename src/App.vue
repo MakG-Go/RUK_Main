@@ -4,51 +4,43 @@
         <transition name="splash">
             <Splash v-if="!start"></Splash>
         </transition>
-        <!-- Контейнер глобального scrollbar -->
 
-        <perfect-scrollbar
-            v-show="start"
-            ref="globalScroll"
-            @ps-scroll-y="onGlobalScroll"
-            class="js-global-scroll"
-        >
-            <div class="wrapper" :class="getMainWrapper">
-                <div class="container-full">
-                    <!-- Меню/Хедер -->
+        <div class="wrapper" :class="getMainWrapper">
 
-                    <Header> </Header>
+            <!-- Меню/Хедер -->
+
+            <Header> </Header>
+
+            <!-- Контейнер глобального scrollbar -->
+
+            <perfect-scrollbar v-if="start" ref="globalScroll" @ps-scroll-y="onGlobalScroll" class="js-global-scroll">
+
+                <div class="container" :class="getMainContainer">
 
                     <router-view v-slot="{ Component }">
-                        <transition
-                            appear
-                            mode="out-in"
-                            appear-active-class="animate__animated animate__fadeIn"
-                            enter-active-class="animate__animated animate__faster animate__fadeIn"
-                            leave-active-class="animate__animated animate__faster animate__fadeOut"
-                        >
-                            <component
-                                :is="Component"
-                                :key="$route.path"
-                            ></component>
+                        <transition appear mode="out-in" appear-active-class="animate__animated animate__fadeIn"
+                            name="navigation">
+                            <component :is="Component" :key="$route.path"></component>
                         </transition>
                     </router-view>
 
                     <!-- Кнопки навигации -->
+                    <transition appear mode="out-in" name="navigation">
+                        <NavigationButton :key="$route.path">
+                        </NavigationButton>
+                    </transition>
 
-                    <NavigationButton>
-                        <!-- <h2 class="btn__counter">
-                            {{ checkRouteName + 1 }}/{{ menu.length }}
-                        </h2> -->
-                    </NavigationButton>
                 </div>
-            </div>
-        </perfect-scrollbar>
+            </perfect-scrollbar>
+        </div>
+
+
     </div>
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
-import NavigationButton from "@/components/NavigationButton.vue";
+import Header from "@/components/menu/Header.vue";
+import NavigationButton from "@/components/menu/NavigationButton.vue";
 import Splash from "&/views/Splash.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
@@ -76,6 +68,11 @@ export default {
                 main__wrapper: this.$route.name === "tutorial-page",
             };
         },
+        getMainContainer() {
+            return {
+                container__main: this.$route.name === "tutorial-page",
+            }
+        }
     },
 
     methods: {
@@ -121,5 +118,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style lang="scss"></style>

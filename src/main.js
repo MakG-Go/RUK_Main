@@ -10,15 +10,19 @@ import gsapPlugin from "@/customPlugins/globalGsap"
 import App from '@/App.vue'
 
 import PerfectScrollbar from 'vue3-perfect-scrollbar'
+import ScrollBar from '@morioh/v-smooth-scrollbar'
 
 
 createApp(App)
     .use(PerfectScrollbar, {
         watchOptions: true,
         options: {
-            suppressScrollX: true
+            suppressScrollX: true,
+            swipeEasing: true,
+            wheelPropagation: false
         }
     })
+
     .use(gsapPlugin)
     .use(Vue3Lottie)
     .use(router)

@@ -37,6 +37,7 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
+    name:"Glossary",
     data() {
         return {
             glossaryData: [],
