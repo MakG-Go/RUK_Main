@@ -1,0 +1,55 @@
+/* Анимации переходов меню */
+
+.menu-enter-active,
+.menu-leave-active {
+    transition: 0.5s;
+}
+
+.menu-enter-from {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+}
+
+.menu-leave-to {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+}
+
+/*--------------------------------------*/
+
+.navigation-enter-active,
+.navigation-leave-active {
+    transition: 0.25s;
+}
+
+.navigation-enter-from {
+    opacity: 0;
+    filter: blur(5px);
+}
+
+.navigation-leave-to {
+    opacity: 0;
+    filter: blur(5px);
+}
+
+/*-------------------------------------*/
+
+.splash-enter-active {
+    animation: close-in 0.25s;
+}
+.splash-leave-active {
+    animation: close-in 0.5s reverse;
+}
+
+@keyframes close-in {
+    0% {
+        opacity: 0;
+        clip-path: circle(0 at 50% 50%);
+    }
+    100% {
+        opacity: 1;
+        clip-path: circle(100%);
+    }
+}

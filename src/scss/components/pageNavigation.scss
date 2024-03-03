@@ -8,15 +8,14 @@
     margin: auto 0;
     justify-content: center;
 
-
     &__item {
         position: relative;
         display: flex;
-        justify-content: center;
+        // justify-content: center;
         align-items: center;
         padding: 0.5em;
         background-color: $white;
-        border: 1px solid transparent;
+        border: 2px solid transparent;
         border-radius: 50px;
         max-width: 24px;
         height: 24px;
@@ -27,25 +26,37 @@
         transition-property: width, max-width, background-color, justify-content, border-color;
         transition-duration: 0.25s;
         transition-timing-function: ease-in-out;
-        pointer-events: none;
 
-        &.active{
-            border-color: $blue_1;
-            pointer-events: all;
-            cursor: pointer;
+        border-color: $blue_1;
+        pointer-events: all;
+        cursor: pointer;
+
+        &.disable {
+            border-color: $gray_1;
+            pointer-events: none;
+            cursor: default;
+        }
+
+        &.active {
+            background-color: $blue_1;
+            .page-navigation__text {
+                color: $blue_1;
+            }
+            &::before {
+                background-color: $white;
+            }
         }
 
         &::before {
             position: absolute;
-            content: '';
+            content: "";
 
             top: 6px;
             left: 6px;
 
-
             width: 10px;
             height: 10px;
-            background-color: #ABA4B5;
+            background-color: $gray_1;
             border-radius: 100%;
 
             transition-property: background-color;
@@ -53,11 +64,12 @@
             transition-timing-function: ease-in-out;
         }
 
-        @media(hover:hover) {
+        @media (hover: hover) {
             &:hover {
-                width: 350px;
-                max-width: 350px;
+                width: 100%;
+                max-width: 500px;
                 background-color: $blue_1;
+                color: $white;
 
                 &::before {
                     background-color: $white;
@@ -87,13 +99,22 @@
 
         &::before {
             position: absolute;
-            content: '';
+            content: "";
             left: 0;
             right: 0;
             margin: 0 auto;
             width: 2px;
             height: 100%;
             background-color: $blue_1;
+            transition-property: background-color;
+            transition-duration: 0.25s;
+            transition-timing-function: ease-in-out;
+        }
+
+        &.disable {
+            &::before {
+                background-color: $gray_1;
+            }
         }
     }
 }

@@ -9,7 +9,6 @@
 import { defineComponent, computed } from "vue";
 
 export default {
-
     name: "SvgIcon",
     props: {
         prefix: {
@@ -33,22 +32,20 @@ export default {
     },
 
     data() {
-        return {
-        }
+        return {};
     },
     computed: {
         symbolId() {
-            return `#${this.prefix}-${this.name}`
+            return `#${this.prefix}-${this.name}`;
         },
         size() {
             return {
                 width: `${parseInt(this.w)}px`,
                 height: `${parseInt(this.h)}px`,
             };
-        }
-    }
-
-}
+        },
+    },
+};
 
 /** For composition API */
 // export default defineComponent({

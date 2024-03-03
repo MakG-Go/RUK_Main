@@ -1,0 +1,45 @@
+.download {
+    &__scroll {
+        height: 80dvh;
+        padding-right: 3rem;
+    }
+    &__item {
+        background-color: rgba(0, 0, 0, 1);
+        border-radius: 10px;
+        padding: 0.5em;
+        margin-bottom: 1em;
+        cursor: pointer;
+        transition-property: background-color;
+        transition-duration: 0.25s;
+        transition-timing-function: ease-in-out;
+        &-title {
+            text-transform: uppercase;
+            font-size: 0.818em;
+            color: #c10230;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            span {
+                margin-right: 1em;
+            }
+            @media screen and (max-width: 768px) {
+                white-space: wrap;
+            }
+            &::after {
+                content: "";
+                width: 100%;
+                height: 1px;
+                background: -webkit-gradient(linear, left top, right top, from(#c10230), to(rgba(193, 2, 48, 0)));
+                background: -o-linear-gradient(left, #c10230 0, rgba(193, 2, 48, 0) 100%);
+                background: linear-gradient(90deg, #c10230 0, rgba(193, 2, 48, 0) 100%);
+            }
+        }
+        &-size {
+            color: white;
+            font-size: 0.818em;
+        }
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    }
+}

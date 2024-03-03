@@ -1,0 +1,112 @@
+.header {
+    position: fixed;
+    top: 0px;
+    right: 0;
+    left: 0;
+    z-index: 99;
+    width: 100%;
+    // max-width: 1280px;
+    margin: 0 auto;
+    padding: 1rem 2.875rem;
+    background-color: white;
+    box-shadow: 0px 4px 16px 0px rgba(34, 34, 34, 0.08);
+    border-radius: 0px 0px 32px 32px;
+
+    transition-property: transform, opacity;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-out;
+
+    &__logo {
+        max-width: 173px;
+        max-height: 32px;
+    }
+
+    &__icon {
+        max-width: 24px;
+        max-height: 24px;
+        use {
+            fill: $black;
+            transition: fill 0.25s ease-in-out;
+        }
+    }
+
+    &__navigation {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        &_text {
+            padding: 4px 12px;
+        }
+    }
+
+    &__container {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &-btn {
+        padding: 0;
+        margin: 0;
+        outline: 0;
+        border: none;
+        position: relative;
+
+        cursor: pointer;
+
+        &:not(:last-child) {
+            margin-right: 1rem;
+        }
+
+        &::after {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 0%;
+            content: ".";
+            color: transparent;
+            background: $blue_1;
+            height: 2px;
+            transition-property: width;
+            transition-duration: 0.25s;
+            transition-timing-function: ease-in-out;
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        &__open {
+            use {
+                fill: $blue_1;
+            }
+            &::after {
+                width: 100%;
+            }
+        }
+
+        &__gloss {
+            display: flex;
+            align-items: center;
+        }
+
+        @media (hover: hover) {
+            &:hover {
+                use {
+                    fill: $blue_1;
+                }
+                &::after {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        top: 0;
+    }
+}

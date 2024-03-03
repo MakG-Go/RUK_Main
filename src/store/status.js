@@ -77,6 +77,8 @@ export default {
 
         getStart(state) {
 
+            console.log('start')
+
             state.start = true
             state.API.initialize()
 

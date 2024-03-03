@@ -10,7 +10,7 @@ import gsapPlugin from "@/customPlugins/globalGsap"
 import App from '@/App.vue'
 
 import PerfectScrollbar from 'vue3-perfect-scrollbar'
-import ScrollBar from '@morioh/v-smooth-scrollbar'
+
 
 
 createApp(App)
@@ -25,15 +25,7 @@ createApp(App)
 
     .use(gsapPlugin)
     .use(Vue3Lottie)
-    .use(router)
     .use(store)
+    .use(router)
     .mount('#app')
 
-
-// InitModule
-function InitModule() {
-}
-
-// ShutdownModule
-function ShutdownModule() {
-}

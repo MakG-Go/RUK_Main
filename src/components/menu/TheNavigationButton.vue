@@ -14,6 +14,7 @@
 import SvgIcon from "../ui/SvgIcon.vue";
 import { mapGetters } from "vuex";
 export default {
+    name: "NavigationButton",
     components: {
         SvgIcon,
     },
@@ -39,9 +40,7 @@ export default {
             }
         },
         getWebGlNavPosition() {
-         
-               return this.$route.name === "tutorial-page"
-        
+            return this.$route.name === "Page_2";
         },
     },
 };

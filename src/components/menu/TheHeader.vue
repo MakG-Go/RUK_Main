@@ -2,17 +2,37 @@
     <div>
         <div class="header" :class="getHeaderClass">
             <div class="header__container">
-
                 <SvgIcon name="logo" class="header__logo"></SvgIcon>
 
                 <div class="header__navigation">
-                    <button v-for="(navBtn, ndx) in navButtons" :key="navBtn.name" class="header-btn"
-                        :class="addHeaderButtonClass(ndx)" @click="showNavfromHeader(ndx)">
-                        <p class="header__navigation_text text-m">{{ navBtn.name }}</p>
+                    <button
+                        v-for="(navBtn, ndx) in navButtons"
+                        :key="navBtn.name"
+                        class="header-btn"
+                        :class="addHeaderButtonClass(ndx)"
+                        @click="showNavfromHeader(ndx)"
+                    >
+                        <span
+                            class="header__navigation_text text-m"
+                            v-if="navBtn.name != 'Глоссарий'"
+                        >
+                            {{ navBtn.name }}
+                        </span>
                     </button>
                 </div>
 
-
+                <div>
+                    <button
+                        class="header-btn header-btn__gloss"
+                        :class="addHeaderButtonClass(getGlossary)"
+                        @click="showNavfromHeader(getGlossary)"
+                    >
+                        <SvgIcon name="gloss" class="header__icon"></SvgIcon>
+                        <span class="header__navigation_text text-m">
+                            {{ getGlossary.name }}
+                        </span>
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -20,7 +40,10 @@
             <div class="menu__contant" :class="gatMenuContant">
                 <div class="menu__container">
                     <transition mode="out-in" name="menu">
-                        <component :is="activeComponent" v-if="activeComponent" />
+                        <component
+                            :is="activeComponent"
+                            v-if="activeComponent"
+                        />
                     </transition>
                 </div>
                 <button class="menu__close" @click="closeMenu">
@@ -32,33 +55,31 @@
 </template>
 
 <script>
-import Menu from "./Menu.vue";
-import Glossary from "./Glossary.vue";
-import Download from "./Download.vue";
+import Menu from "./TheMenu.vue";
+import Glossary from "./TheGlossary.vue";
+import Download from "./TheDownload.vue";
 import SvgIcon from "../ui/SvgIcon.vue";
 
 import { shallowRef } from "vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
+    name: "Header",
     components: { Menu, Glossary, Download, SvgIcon },
     data() {
         return {
             navButtons: [
                 {
-
                     name: "Содержание",
                     active: false,
                     component: shallowRef(Menu),
                 },
                 {
-
                     name: "Полезные материалы",
                     active: false,
                     component: shallowRef(Download),
                 },
                 {
-
                     name: "Глоссарий",
                     active: false,
                     component: shallowRef(Glossary),
@@ -72,23 +93,27 @@ export default {
         ...mapActions("header", ["toggleMenu"]),
 
         showNavfromHeader(num) {
-
             if (!this.menuState) {
                 this.toggleMenu();
             }
 
-
             this.navButtons.forEach((item, ndx) => {
                 num === ndx ? (item.active = true) : (item.active = false);
             });
-            this.activeComponent = this.navButtons[num].component;
+
+            if (typeof num === "number") {
+                this.activeComponent = this.navButtons[num].component;
+            }
+            if (typeof num === "object") {
+                num.active = true;
+                this.activeComponent = num.component;
+                return;
+            }
         },
-        closeMenu(){
+        closeMenu() {
             this.toggleMenu();
-            this.activeComponent = shallowRef(Menu)
-
-        }
-
+            this.activeComponent = shallowRef(Menu);
+        },
     },
 
     computed: {
@@ -115,12 +140,25 @@ export default {
                 menu__contant_open: this.menuState,
             };
         },
+        getGlossary() {
+            return this.navButtons.filter(
+                (item) => item.name === "Глоссарий"
+            )[0];
+        },
         addHeaderButtonClass() {
             return (key) => {
-                return {
-                    "header-btn--open": this.navButtons[key].active && this.menuState,
+                if (typeof key === "number") {
+                    return {
+                        "header-btn__open":
+                            this.navButtons[key].active && this.menuState,
+                    };
                 }
-            }
+                if (typeof key === "object") {
+                    return {
+                        "header-btn__open": key.active && this.menuState,
+                    };
+                }
+            };
         },
     },
 };

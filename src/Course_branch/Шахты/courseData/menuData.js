@@ -4,8 +4,6 @@ const MENU_IMAGES = new URL("/images/menu", import.meta.url).href + "/";
 export const courseMenu =
     [
         { pageRoute: "tutorial-page", name: "Введение", image: `${MENU_IMAGES}img-1.jpg` },
-        /** Обычный роут */
-        { pageRoute: "final", name: "Заключение", image: `${MENU_IMAGES}img-2.jpg` },
 
         {
             pageRoute: "Page_1", name: "Слайд 1", image: `${MENU_IMAGES}img-2.jpg`,
@@ -14,8 +12,10 @@ export const courseMenu =
                 { pageRoute: "Page_1", hash: "#menu-Part_2", name: "Часть 2" }
             ]
         },
-        { pageRoute: "final", name: "Слайд 2", image: `${MENU_IMAGES}img-2.jpg` },
-        { pageRoute: "final", name: "Слайд 3", image: `${MENU_IMAGES}img-2.jpg` },
+        { pageRoute: "Page_2", name: "Схема 3D", image: `${MENU_IMAGES}img-3.jpg` },
+
+        { pageRoute: "final", name: "Заключение", image: `${MENU_IMAGES}img-2.jpg` },
+
     ]
 
 
@@ -39,8 +39,19 @@ export const courseGlossary =
 export const courceDownload =
     [
         {
-            name: 'Картинка',
+            title: `Большое название с большим словом, у которого непередаваемые ощущения`,
+            name: `Перейдите по ссылке, чтобы познакомиться со схемой угледобывающего устройства`,
             link: file_1,
-            size: '681 Kb, JPG'
+            size: '681 Kb, JPG',
+            img: `${MENU_IMAGES}download-1.jpg`,
+            icon: 'link'
+        },
+        {
+            title: `Схема Цепочка создания ценностей РУК`,
+            name: `Скачайте памятку для постоянного пользования`,
+            link: file_1,
+            size: '681 Kb, JPG',
+            img: `${MENU_IMAGES}download-2.jpg`,
+            icon: 'download'
         },
     ]

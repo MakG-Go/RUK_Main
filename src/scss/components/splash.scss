@@ -1,15 +1,17 @@
 .splash {
+    position: fixed;
+    top: 0;
+    left: 0;
     background-color: black;
     height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
-    clip-path: circle(100%);
-    transition-property: clip-path, height;
+    // clip-path: circle(100%);
+    // transition-property: clip-path, height;
     // transition-duration: 0.8s;
-    transition-timing-function: ease-in-out;
+    // transition-timing-function: ease-in-out;
     z-index: 100;
-    position: absolute;
 
     &-container {
         // height: 75vh;
@@ -35,14 +37,4 @@
     img {
         width: 100%;
     }
-}
-
-.splash-enter-active,
-.splash-leave-active {
-    transition: 0.8s;
-}
-
-.splash-enter,
-.splash-leave-to {
-    clip-path: circle(0px at 50% 50%);
 }

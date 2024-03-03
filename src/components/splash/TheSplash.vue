@@ -2,6 +2,7 @@
 import { mapActions, mapGetters } from "vuex";
 import SvgIcon from "@/components/ui/SvgIcon.vue";
 export default {
+    name: "Splash",
     components: {
         SvgIcon,
     },
@@ -32,9 +33,17 @@ export default {
                 </div>
                 <div class="col-lg-6 col-xs-12">
                     <div class="flex flex__col jf-end h-100">
+                        <!-- <button @click="getStart" class="btn splash-btn">
+                            <span>Начать</span
+                            ><SvgIcon
+                                name="next"
+                                w="50"
+                                h="20"
+                                color="white"
+                            ></SvgIcon>
+                        </button> -->
                         <router-link
                             :to="{ name: 'tutorial-page' }"
-                            @click="getStart"
                             class="btn splash-btn"
                         >
                             <span>Начать</span

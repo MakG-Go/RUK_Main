@@ -1,75 +1,95 @@
 
 <script>
-
-
-import { DepthTexture } from 'three';
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
     name: "PageNavigation",
+    props: {
+        threshhold: { type: Number, default: 20 },
+        observe: { type: Number, default: 0.25 },
+    },
     data() {
         return {
             activatedSection: [],
-            currentSection: '',
-        }
+            currentSection: "",
+        };
     },
     methods: {
-
         createObserver() {
+            const options = {
+                root: document.querySelector(".wrapper-course"),
+                threshold: this.createThreshold,
+            };
+
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
-                    if (entry.intersectionRatio > 0) {
-                        this.checkActive(entry.target.id)
-                        this.currentSection = entry.target.id
+                    if (entry.intersectionRatio > this.observe) {
+                        this.checkActive(entry.target.id);
+                        this.currentSection = entry.target.id;
                     }
-                })
+                });
+            }, options);
+            document.querySelectorAll(".js-observer").forEach((section) => {
+                observer.observe(section);
             });
-            document.querySelectorAll('.js-observer').forEach((section) => {
-                observer.observe(section)
-            })
         },
 
         checkActive(section) {
-
             if (!this.activatedSection.includes(section)) {
                 this.activatedSection.push(section);
-                return
+                return;
             }
         },
-
     },
 
     computed: {
         ...mapGetters("header", ["menu", "menuState"]),
+        ...mapGetters("status", ["visit"]),
 
         getNavigationData() {
-            const subArray = this.menu.filter(item => item.pageRoute === this.$route.name)
-            return subArray[0]
-
+            const subArray = this.menu.filter(
+                (item) => item.pageRoute === this.$route.name
+            );
+            return subArray[0];
         },
 
         getLastBoolit() {
             return (ndx) => {
-                return ndx + 1 < this.getNavigationData.scrollPage.length
-            }
+                return ndx + 1 < this.getNavigationData.scrollPage.length;
+            };
         },
 
         getActivatedSection() {
-
             return (section) => {
                 return {
-                    active: this.activatedSection.includes(section.split('').slice(1).join(''))
-                }
-            }
+                    disable: !this.activatedSection.includes(
+                        section.split("").slice(1).join("")
+                    ),
+                };
+            };
+        },
 
-        }
+        getCurentSection() {
+            return (section) => {
+                return {
+                    active:
+                        section.split("").slice(1).join("") ===
+                        this.currentSection,
+                };
+            };
+        },
+        createThreshold() {
+            let thresh = [];
+            for (let i = 0; i <= this.threshhold; i++) {
+                thresh.push(i / this.threshhold);
+            }
+            return thresh;
+        },
     },
     mounted() {
-
-        this.createObserver()
-
-    }
-
-}
+        console.log(this.visit);
+        this.createObserver();
+    },
+};
 </script>
 
 <template lang="">
@@ -78,21 +98,21 @@ export default {
         <ul class="page-navigation">
             <li
                 v-for="(
-                    subScroll, subTitleKey
+                    section, sectionKey
                 ) in getNavigationData.scrollPage"
                 class=""
-                :key="subScroll.name"
+                :key="section.name"
             >
                 <router-link
-                    class="cursor-default"
+                    :class="getActivatedSection(section.hash)"
                     :to="{
-                        name: subScroll.pageRoute,
-                        hash: subScroll.hash,
+                        name: section.pageRoute,
+                        hash: section.hash,
                     }"
-                    ><div class="page-navigation__item" :class="getActivatedSection(subScroll.hash)">
-                        <span class="page-navigation__text">{{ subScroll.name }}</span>
+                    ><div class="page-navigation__item" :class="[getActivatedSection(section.hash), getCurentSection(section.hash)]">
+                        <span class="page-navigation__text">{{ section.name }}</span>
                     </div>
-                    <div class="page-navigation__line" v-if="getLastBoolit(subTitleKey)"></div>
+                    <div class="page-navigation__line" :class="getActivatedSection(section.hash)" v-if="getLastBoolit(sectionKey)"></div>
                 </router-link>
             </li>
          </ul>
@@ -100,5 +120,4 @@ export default {
 </template>
 
 <style lang="">
-    
 </style>
