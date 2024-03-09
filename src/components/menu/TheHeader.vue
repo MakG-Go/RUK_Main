@@ -1,63 +1,10 @@
-<template>
-    <div>
-        <div class="header" :class="getHeaderClass">
-            <div class="header__container">
-                <SvgIcon name="logo" class="header__logo"></SvgIcon>
-
-                <div class="header__navigation">
-                    <button
-                        v-for="(navBtn, ndx) in navButtons"
-                        :key="navBtn.name"
-                        class="header-btn"
-                        :class="addHeaderButtonClass(ndx)"
-                        @click="showNavfromHeader(ndx)"
-                    >
-                        <span
-                            class="header__navigation_text text-m"
-                            v-if="navBtn.name != 'Глоссарий'"
-                        >
-                            {{ navBtn.name }}
-                        </span>
-                    </button>
-                </div>
-
-                <div>
-                    <button
-                        class="header-btn header-btn__gloss"
-                        :class="addHeaderButtonClass(getGlossary)"
-                        @click="showNavfromHeader(getGlossary)"
-                    >
-                        <SvgIcon name="gloss" class="header__icon"></SvgIcon>
-                        <span class="header__navigation_text text-m">
-                            {{ getGlossary.name }}
-                        </span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="menu__nav" :class="getMenuClass">
-            <div class="menu__contant" :class="gatMenuContant">
-                <div class="menu__container">
-                    <transition mode="out-in" name="menu">
-                        <component
-                            :is="activeComponent"
-                            v-if="activeComponent"
-                        />
-                    </transition>
-                </div>
-                <button class="menu__close" @click="closeMenu">
-                    <SvgIcon name="close"></SvgIcon>
-                </button>
-            </div>
-        </div>
-    </div>
-</template>
-
 <script>
+import { _GET_DEVICE_TYPE } from "@/globals/Methods.js"
+console.log(_GET_DEVICE_TYPE())
+
 import Menu from "./TheMenu.vue";
 import Glossary from "./TheGlossary.vue";
-import Download from "./TheDownload.vue";
+import Materials from "./TheMaterials.vue";
 import SvgIcon from "../ui/SvgIcon.vue";
 
 import { shallowRef } from "vue";
@@ -65,7 +12,7 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
     name: "Header",
-    components: { Menu, Glossary, Download, SvgIcon },
+    components: { Menu, Glossary, Materials, SvgIcon },
     data() {
         return {
             navButtons: [
@@ -77,7 +24,7 @@ export default {
                 {
                     name: "Полезные материалы",
                     active: false,
-                    component: shallowRef(Download),
+                    component: shallowRef(Materials),
                 },
                 {
                     name: "Глоссарий",
@@ -120,6 +67,10 @@ export default {
         ...mapGetters("status", ["visitTotal", "visit", "objectivs"]),
         ...mapGetters("header", ["menuState"]),
 
+        getDeviceType() {
+            return _GET_DEVICE_TYPE() === "desktop"
+        },
+
         getMenuClass() {
             return {
                 "menu__nav-open": this.menuState,
@@ -160,9 +111,70 @@ export default {
                 }
             };
         },
+        getBurgerActive() {
+            return { active: this.menuState }
+
+        }
     },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<template>
+    <div>
+        <div class="header" :class="getHeaderClass">
+            <div class="header__container">
+                <SvgIcon name="logo" class="header__logo"></SvgIcon>
 
+                <div class="header__navigation" v-if="getDeviceType">
+                    <button v-for="(navBtn, ndx) in navButtons" :key="navBtn.name" class="header-btn"
+                        :class="addHeaderButtonClass(ndx)" @click="showNavfromHeader(ndx)">
+                        <span class="header__navigation_text text-m" v-if="navBtn.name != 'Глоссарий'">
+                            {{ navBtn.name }}
+                        </span>
+                    </button>
+                </div>
+
+                <div class="flex">
+
+                    <button class="header-btn header-btn__gloss" :class="addHeaderButtonClass(getGlossary)"
+                        @click="showNavfromHeader(getGlossary)">
+                        <SvgIcon name="gloss" class="header__icon"></SvgIcon>
+
+                        <span class="header__navigation_text text-m" v-if="getDeviceType">
+                            {{ getGlossary.name }}
+                        </span>
+                    </button>
+
+                    <button class="header__burger" :class="getBurgerActive" @click="closeMenu" v-if="!getDeviceType">
+                        <span class="header__burger_line"></span>
+                        <span class="header__burger_line"></span>
+                    </button>
+
+                </div>
+
+
+
+
+
+
+
+            </div>
+        </div>
+
+        <div class="menu__nav" :class="getMenuClass">
+            <div class="menu__contant" :class="gatMenuContant">
+                <div class="menu__container">
+                    <transition mode="out-in" name="menu">
+                        <component :is="activeComponent" v-if="activeComponent" />
+                    </transition>
+                </div>
+                <button class="menu__close" @click="closeMenu" v-if="getDeviceType">
+                    <SvgIcon name="close"></SvgIcon>
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+<style lang="scss" scoped></style>

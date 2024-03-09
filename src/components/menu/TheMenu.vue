@@ -24,7 +24,7 @@
                                     v-if="!getActiveted(page.pageRoute)"
                                 ></SvgIcon>
                             </div>
-                            <p class="text-m">{{ page.name }}</p>
+                            <p class="menu__nav-card_text ml-15 ml-xs-10">{{ page.name }}</p>
                         </article>
                     </router-link>
                 </li>

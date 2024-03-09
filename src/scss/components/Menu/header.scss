@@ -24,6 +24,7 @@
     &__icon {
         max-width: 24px;
         max-height: 24px;
+
         use {
             fill: $black;
             transition: fill 0.25s ease-in-out;
@@ -84,6 +85,7 @@
             use {
                 fill: $blue_1;
             }
+
             &::after {
                 width: 100%;
             }
@@ -99,9 +101,42 @@
                 use {
                     fill: $blue_1;
                 }
+
                 &::after {
                     width: 100%;
                 }
+            }
+        }
+    }
+
+    &__burger {
+
+        &_line {
+
+            width: 22px;
+            height: 2px;
+            border-radius: 25px;
+            background-color: $black;
+            display: block;
+            margin: 10px auto;
+            transition: all 0.3s ease-in-out;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &.active {
+            .header__burger_line {
+
+                &:nth-child(1) {
+                    transform: translateY(6px) rotate(45deg);
+                }
+
+                &:nth-child(2) {
+                    transform: translateY(-6px) rotate(-45deg);
+                }
+
             }
         }
     }

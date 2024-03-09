@@ -54,4 +54,22 @@ export const courceDownload =
             img: `${MENU_IMAGES}download-2.jpg`,
             icon: 'download'
         },
+
+        {
+            title: `Схема Цепочка создания ценностей РУК`,
+            name: `Скачайте памятку для постоянного пользования`,
+            link: file_1,
+            size: '681 Kb, JPG',
+            img: `${MENU_IMAGES}download-2.jpg`,
+            icon: 'download'
+        },
+
+        {
+            title: `Большое название с большим словом, у которого непередаваемые ощущения`,
+            name: `Перейдите по ссылке, чтобы познакомиться со схемой угледобывающего устройства`,
+            link: file_1,
+            size: '681 Kb, JPG',
+            img: `${MENU_IMAGES}download-1.jpg`,
+            icon: 'link'
+        },
     ]

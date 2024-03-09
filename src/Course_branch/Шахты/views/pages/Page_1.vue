@@ -14,7 +14,7 @@ export default {
     <div>
         <h1 class="mb-20 mb-xs-15">Page_1</h1>
 
-        <PageNavigation :threshhold="20" :observe="0.1" />
+        <PageNavigation :threshhold="50" :observe="0.1" />
 
         <section>
             <h2 class="h2 mb-20 mb-xs-10">Первый</h2>

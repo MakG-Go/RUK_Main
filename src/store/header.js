@@ -6,13 +6,13 @@ export default {
         open: false,
         menu: courseMenu,
         glossary: courseGlossary,
-        downloads: courceDownload
+        materials: courceDownload
 
     },
     getters: {
         menu: (state) => state.menu,
         glossary: (state) => state.glossary,
-        downloads: (state) => state.downloads,
+        materials: (state) => state.materials,
         menuState: (state) => state.open,
         curentPage: (state) => (name) => state.menu.routs.findIndex((el) => el.pageRoute === name)
 

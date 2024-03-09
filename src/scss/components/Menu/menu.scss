@@ -4,7 +4,7 @@
         max-width: 1280px;
         width: 100dvw;
         height: calc(100% - 64px);
-        background-color: $white_2;
+        // background-color: $white_2;
         margin: 0 auto;
         padding: 3rem;
 
@@ -12,8 +12,7 @@
         transition-duration: 0.25s;
         transition-timing-function: ease-in-out;
 
-        &_open {
-        }
+        &_open {}
 
         &_buttons {
             display: flex;
@@ -34,11 +33,12 @@
         height: 100%;
         width: 100%;
         overflow-y: hidden;
+        background: linear-gradient(254deg, #003C7C 0%, #0056B2 100%);
         transform: translateY(-100%);
         transition-property: transform;
         transition-duration: 0.5s;
         transition-timing-function: ease-in-out;
-        background-color: $white_2;
+
 
         &-open {
             transform: translateY(0);
@@ -93,11 +93,14 @@
                 height: 72px;
             }
 
-            &.active {
+            &_text{
+                color: $white;
+                font-size: clamp(0.875rem, 10vw - 1rem, 1rem);
             }
 
-            &.visited {
-            }
+            &.active {}
+
+            &.visited {}
 
             &.disable {
                 .menu__nav-card_image {
@@ -107,8 +110,7 @@
                 }
             }
 
-            &:hover {
-            }
+            &:hover {}
         }
 
         &-btn {
@@ -138,7 +140,8 @@
     }
 
     &__container {
-        // overflow: hidden;
+        max-height: 80vh;
+        overflow: hidden;
         height: 100%;
         width: 100%;
     }

@@ -25,6 +25,10 @@
     right: 0;
     /* please don't change 'position' */
     position: absolute;
+
+    @media (hover: none) {
+           pointer-events: none;
+    }
 }
 
 .ps--active-x > .ps__rail-x,
@@ -49,7 +53,7 @@
 .ps .ps__rail-x.ps--clicking,
 .ps .ps__rail-y.ps--clicking {
     border-radius: 6px;
-    background-color: rgba($blue_1, 0.2);
+    background-color: rgba($white, 0.2);
     opacity: 0.9;
 }
 
@@ -57,7 +61,7 @@
  * Scrollbar thumb styles
  */
 .ps__thumb-x {
-    background-color: $blue_1;
+    background-color: $white;
     border-radius: 6px;
     transition: background-color 0.2s linear, height 0.2s ease-in-out;
     -webkit-transition: background-color 0.2s linear, height 0.2s ease-in-out;
@@ -69,7 +73,7 @@
 }
 
 .ps__thumb-y {
-    background-color: $blue_1;
+    background-color: $white;
     border-radius: 6px;
     transition: background-color 0.2s linear, width 0.2s ease-in-out;
     -webkit-transition: background-color 0.2s linear, width 0.2s ease-in-out;
@@ -83,14 +87,14 @@
 .ps__rail-x:hover > .ps__thumb-x,
 .ps__rail-x:focus > .ps__thumb-x,
 .ps__rail-x.ps--clicking .ps__thumb-x {
-    background-color: $blue_1;
+    background-color: $white;
     height: 11px;
 }
 
 .ps__rail-y:hover > .ps__thumb-y,
 .ps__rail-y:focus > .ps__thumb-y,
 .ps__rail-y.ps--clicking .ps__thumb-y {
-    background-color: $blue_1;
+    background-color: $white;
     width: 6px;
 }
 
@@ -104,5 +108,11 @@
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
     .ps {
         overflow: auto !important;
+    }
+}
+
+.materials__scroll {
+    .ps__rail-y{
+        margin-top: 0;
     }
 }
