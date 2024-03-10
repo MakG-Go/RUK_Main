@@ -19,6 +19,21 @@
 
 /*--------------------------------------*/
 
+.menu-open-enter-active,
+.menu-open-leave-active {
+    transition: 0.5s;
+}
+
+.menu-open-enter-from {
+    transform: translateY(-100%);
+}
+
+.menu-open-leave-to {
+    transform: translateY(-100%);
+}
+
+/*--------------------------------------*/
+
 .navigation-enter-active,
 .navigation-leave-active {
     transition: 0.25s;

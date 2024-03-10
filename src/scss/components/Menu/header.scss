@@ -39,6 +39,21 @@
         &_text {
             padding: 4px 12px;
         }
+
+        &_mobile {
+            position: absolute;
+            top: 75px;
+            z-index: 99;
+
+            .header__navigation_text {
+                color: $white;
+            }
+            .header-btn {
+                &::after {
+                    background: $white;
+                }
+            }
+        }
     }
 
     &__container {
@@ -110,9 +125,7 @@
     }
 
     &__burger {
-
         &_line {
-
             width: 22px;
             height: 2px;
             border-radius: 25px;
@@ -128,7 +141,6 @@
 
         &.active {
             .header__burger_line {
-
                 &:nth-child(1) {
                     transform: translateY(6px) rotate(45deg);
                 }
@@ -136,9 +148,14 @@
                 &:nth-child(2) {
                     transform: translateY(-6px) rotate(-45deg);
                 }
-
             }
         }
+    }
+
+    @media (hover: none) {
+        padding: 1rem;
+        border-radius: 1rem;
+        border-radius: 0 0 1rem 1rem;
     }
 
     @media screen and (max-width: 768px) {

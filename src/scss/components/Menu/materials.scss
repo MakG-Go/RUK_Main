@@ -1,17 +1,18 @@
 .materials {
     &__scroll {
         height: 80dvh;
-        padding-right: 3rem;
+        padding: 0.625rem 1.5rem;
     }
 
-    &__container{
+    &__container {
         display: flex;
         flex-wrap: wrap;
         gap: 1.5rem;
-
+        justify-content: center;
     }
 
-    &__link, &__item {
+    &__link,
+    &__item {
         border-radius: 32px;
         padding: 2rem 2.5rem;
         cursor: pointer;
@@ -24,46 +25,40 @@
         @media (hover: none) {
             width: 100%;
         }
-
-        
     }
 
-    &__link{
-        background-color: #FCE7BB;
+    &__link {
+        background-color: #fce7bb;
     }
 
     &__item {
-        background-color: #D4EBFF;
-
+        background-color: #d4ebff;
     }
 
-    &__img{
+    &__img {
         border-radius: 24px;
         overflow: hidden;
         margin-bottom: 1.5rem;
     }
 
     &__title {
-
-        font-family: 'Franklin_Gothic_Demi', sans-serif;
+        font-family: "Franklin_Gothic_Demi", sans-serif;
         font-size: clamp(1.25rem, 4vw - 1rem, 1.5rem);
         color: $black;
         margin-bottom: 1.5rem;
-
     }
 
-    &__description{
+    &__description {
         display: flex;
         justify-content: space-between;
 
-        &_text{
+        &_text {
             font-size: 0.875rem;
         }
 
-        svg{
+        svg {
             max-width: 24px;
             max-height: 24px;
         }
     }
-
 }

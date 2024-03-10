@@ -4,13 +4,19 @@ export default {
     name: "Glossary",
     data() {
         return {
-            glossaryData: [],
+            typeData: null,
+            literData: null,
+            currentLiter: null,
+            inputText: null,
+            allLiter: true,
+            allTypes: true,
         };
     },
     methods: {
-        createSlice() {
+        createSlice(arr) {
             let simbols = [];
-            simbols = this.glossary.map((item) => item.title.slice(0, 1));
+            let glossaryData = [];
+            simbols = arr.map((item) => item.title.slice(0, 1));
             simbols = simbols
                 .filter((item, key) => simbols.indexOf(item) === key)
                 .sort();
@@ -22,16 +28,65 @@ export default {
 
                 glosObject.description = [];
 
-                this.glossaryData.push(glosObject);
-
-                this.glossary.forEach((item, ndx) => {
+                arr.forEach((item, ndx) => {
                     let firstLiter = item.title.slice(0, 1);
-                    firstLiter === simbol
-                        ? glosObject.description.push(item)
-                        : "";
+
+                    if (firstLiter === simbol) {
+                        glosObject.description.push(item);
+                    }
                 });
+
+                glossaryData.push(glosObject);
             });
+
+            return glossaryData;
         },
+
+        getAllLiter() {
+            this.allLiter = true;
+            this.literData = null;
+            this.currentLiter = null;
+        },
+
+        getAllTypes() {
+            this.allTypes = true;
+            this.typeData = null;
+            if (this.currentLiter != null) {
+                this.filterLiter(this.currentLiter);
+            }
+        },
+
+        getDescriptions(arr) {
+            return arr
+                .map((item) => item.description)
+                .reduce((a, b) => {
+                    return [...a, ...b];
+                });
+        },
+        filterText() {
+            console.log(this.inputText);
+        },
+
+        filterLiter(liter) {
+            this.allLiter = false;
+            this.currentLiter = liter;
+            let literArr = JSON.parse(JSON.stringify(this.getLiterData));
+            this.literData = literArr.filter((item) => item.liter === liter);
+        },
+
+        filterType(type) {
+            this.allTypes = false;
+
+            const descr = this.getAllDescriptions.filter(
+                (item) => item.type.toUpperCase() === type.toUpperCase()
+            );
+            this.typeData = this.createSlice(descr);
+
+            if (this.currentLiter != null) {
+                this.filterLiter(this.currentLiter);
+            }
+        },
+
         scrollTo(key) {
             let container = this.$refs.scroll.$el;
             let elem = this.$refs.liter[key];
@@ -47,27 +102,131 @@ export default {
             });
         },
     },
-    mounted() {
-        this.createSlice();
-    },
+
     computed: {
         ...mapGetters("header", ["glossary"]),
+
+        getGlossaryHeader() {
+            return this.glossary.glossaryProps;
+        },
+
+        getInputPlaceholder() {
+            return this.glossary.glossaryProps?.placeholder;
+        },
+
+        createGlossData() {
+            return this.createSlice(this.glossary.glossaryData);
+        },
+
+        getStartData() {
+            return JSON.parse(JSON.stringify(this.createGlossData));
+        },
+
+        getCurrentData() {
+            if (!this.allTypes && this.allLiter) {
+                return this.typeData;
+            }
+            if (!this.allTypes && !this.allLiter) {
+                return this.literData;
+            }
+            if (this.allTypes && !this.allLiter) {
+                return this.literData;
+            }
+            return this.getStartData;
+        },
+
+        getLiterData() {
+            if (!this.allTypes) {
+                return this.typeData;
+            }
+            return this.getStartData;
+        },
+
+        getAllDescriptions() {
+            return this.getDescriptions(this.getStartData);
+        },
+
+        getDataType() {
+            const dataType = this.getAllDescriptions.map(
+                (item, key) => item.type
+            );
+
+            let trueType = dataType.filter(
+                (item, key) => dataType.indexOf(item) === key
+            );
+
+            let compliteType = trueType.map((item) => {
+                return item.charAt(0).toUpperCase() + item.slice(1);
+            });
+
+            console.log(compliteType);
+
+            return compliteType;
+        },
     },
+
+    mounted() {},
 };
 </script>
 
 <template>
     <div class="glossary__container">
+        <div class="glossary__header mb-40 mb-xs-15">
+            <h2
+                class="text-white text-demi mb-15 mb-xs-15"
+                v-html="getGlossaryHeader.title"
+            ></h2>
+            <p
+                class="text-white text-m"
+                v-html="getGlossaryHeader.description"
+            ></p>
+        </div>
+        <div class="glossary__link_container">
+            <button class="glossary__link" @click="getAllLiter">
+                <span>Все</span>
+            </button>
+            <div
+                v-for="(glosData, key) in getCurrentData"
+                :key="glosData.description + key + Date.now()"
+                @click="filterLiter(glosData.liter)"
+                class="glossary__link"
+            >
+                <span>{{ glosData.liter }}</span>
+            </div>
+        </div>
+
+        <div class="glossary__type_container">
+            <input
+                class="glossary__input"
+                @keyup="filterText"
+                v-model="inputText"
+                type="text"
+                :placeholder="getInputPlaceholder"
+            />
+
+            <button class="glossary__link" @click="getAllTypes">
+                <span>Все</span>
+            </button>
+            <button
+                class="glossary__link"
+                v-for="(type, typeKey) in getDataType"
+                :key="type + typeKey + Date.now()"
+                @click="filterType(type)"
+            >
+                <span v-html="type"></span>
+            </button>
+        </div>
+
         <perfect-scrollbar class="glossary__scroll" ref="scroll">
-            <div v-for="glosData in glossaryData" :key="glosData.litter">
-                <!-- <h2 class="glossary__liter" ref="liter">
-                    {{ glosData.liter }}
-                </h2> -->
+            <div
+                v-for="(glosData, key) in getCurrentData"
+                :key="key + Date.now()"
+            >
                 <ul class="glossary__contant" ref="liter">
                     <li
-                        class="mb-pink"
+                        class="glossary__card"
                         v-for="literData in glosData.description"
-                        :key="literData.title"
+                        :key="literData.title + Date.now()"
                     >
                         <div class="glossary__title">
                             <span>{{ literData.title }}</span>
@@ -75,20 +234,13 @@ export default {
                         <p class="glossary__text">
                             {{ literData.text }}
                         </p>
+                        <div class="glossary__image">
+                            <img :src="literData.img" alt="" />
+                        </div>
                     </li>
                 </ul>
             </div>
         </perfect-scrollbar>
-        <div class="glossary__link_container">
-            <div
-                v-for="(glosData, key) in glossaryData"
-                :key="glosData.description"
-                @click="scrollTo(key)"
-                class="glossary__link"
-            >
-                <span>{{ glosData.liter }}</span>
-            </div>
-        </div>
     </div>
 </template>
 

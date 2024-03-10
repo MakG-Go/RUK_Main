@@ -12,7 +12,12 @@
         transition-duration: 0.25s;
         transition-timing-function: ease-in-out;
 
-        &_open {}
+        @media (hover: none) {
+            padding: 3rem 0.5rem;
+        }
+
+        &_open {
+        }
 
         &_buttons {
             display: flex;
@@ -33,16 +38,7 @@
         height: 100%;
         width: 100%;
         overflow-y: hidden;
-        background: linear-gradient(254deg, #003C7C 0%, #0056B2 100%);
-        transform: translateY(-100%);
-        transition-property: transform;
-        transition-duration: 0.5s;
-        transition-timing-function: ease-in-out;
-
-
-        &-open {
-            transform: translateY(0);
-        }
+        background: linear-gradient(254deg, #003c7c 0%, #0056b2 100%);
 
         &-content {
             display: flex;
@@ -93,14 +89,16 @@
                 height: 72px;
             }
 
-            &_text{
+            &_text {
                 color: $white;
                 font-size: clamp(0.875rem, 10vw - 1rem, 1rem);
             }
 
-            &.active {}
+            &.active {
+            }
 
-            &.visited {}
+            &.visited {
+            }
 
             &.disable {
                 .menu__nav-card_image {
@@ -110,7 +108,8 @@
                 }
             }
 
-            &:hover {}
+            &:hover {
+            }
         }
 
         &-btn {
@@ -140,10 +139,13 @@
     }
 
     &__container {
-        max-height: 80vh;
+        max-height: 80dvh;
         overflow: hidden;
         height: 100%;
         width: 100%;
+
+        border-top: 2px solid rgba($white, 0.7);
+        border-bottom: 2px solid rgba($white, 0.7);
     }
 
     &__close {

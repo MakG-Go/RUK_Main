@@ -1,5 +1,6 @@
 import file_1 from "/images/splash.jpg"
 const MENU_IMAGES = new URL("/images/menu", import.meta.url).href + "/";
+const GLOSSARY_IMAGES = new URL("/images/glossary", import.meta.url).href + "/";
 
 export const courseMenu =
     [
@@ -21,20 +22,59 @@ export const courseMenu =
 
 
 export const courseGlossary =
-    [
-        { "title": "Array", "text": "A collection of elements of the same type stored in contiguous memory locations." },
-        { "title": "Table", "text": "A data structure consisting of rows and columns, where each column contains data of the same type." },
-        { "title": "List", "text": "A collection of elements of different types, stored in a non-contiguous memory location." },
-        { "title": "Dictionary", "text": "A collection of key-value pairs, where each key is unique and maps to a value." },
-        { "title": "Set", "text": "A collection of unique elements, where the order of elements is not guaranteed." },
-        { "title": "Stack", "text": "A data structure that follows the Last-In-First-Out (LIFO) principle." },
-        { "title": "Queue", "text": "A data structure that follows the First-In-First-Out (FIFO) principle." },
-        { "title": "Tree", "text": "A hierarchical data structure consisting of nodes, where each node has a parent and zero or more children." },
-        { "title": "Graph", "text": "A non-linear data structure consisting of nodes and edges, where each edge connects two nodes." },
-        { "title": "Hash Table", "text": "A data structure that maps keys to values, using a hash function to compute an index into an array of buckets." }
+{
+    glossaryProps: {
+        "title": "Глоссарий",
+        "description": "Легко просматривайте все содержимое вашей библиотеки, используя поиск и фильтрацию для скорости и точности поиска",
+        "placeholder": "Найти слово, аббревиатуру"
+    },
+    glossaryData: [
+        {
+            "title": "Каменный уголь",
+            "text": "Твердое горючее полезное ископаемое в земной коре, которое залегает в форме пластов.",
+            "img": `${GLOSSARY_IMAGES}img-1.jpg`,
+            "type": "открытая добыча"
+        },
+        {
+            "title": "Штрек",
+            "text": "Обозначение угледобывающего предприятия с «закрытой» (подземной) добычей (при открытых разработках предприятие именуется «разрезом», см. статью «Разрез»). В историческом смысле слова «шахта» — это вертикальная выработка от поверхности до разрабатываемых горизонтов. Слово «шахта» — немецкого происхождения, родственное словам Schaft (‘скребок’) и глаголу shaben (‘скоблить’). Вместо слова «шахта» в значении «предприятие» употреблялись наименования «рудник», либо «копь» (родство с глаголом «копать» очевидно).",
+            "img": `${GLOSSARY_IMAGES}img-2.jpg`,
+            "type": "закрытая добыча"
+        },
+        {
+            "title": "Шахта",
+            "text": "Обозначение угледобывающего предприятия с «закрытой» (подземной) добычей (при открытых разработках предприятие именуется «разрезом», см. статью «Разрез»). В историческом смысле слова «шахта» — это вертикальная выработка от поверхности до разрабатываемых горизонтов. Слово «шахта» — немецкого происхождения, родственное словам Schaft (‘скребок’) и глаголу shaben (‘скоблить’). Вместо слова «шахта» в значении «предприятие» употреблялись наименования «рудник», либо «копь» (родство с глаголом «копать» очевидно).",
+            "img": `${GLOSSARY_IMAGES}img-3.jpg`,
+            "type": "Производство концентрата"
+        },
+        {
+            "title": "Каменный уголь",
+            "text": "Твердое горючее полезное ископаемое в земной коре, которое залегает в форме пластов.",
+            "img": `${GLOSSARY_IMAGES}img-1.jpg`,
+            "type": "открытая добыча"
+        },
+        {
+            "title": "Штрек",
+            "text": "Обозначение угледобывающего предприятия с «закрытой» (подземной) добычей (при открытых разработках предприятие именуется «разрезом», см. статью «Разрез»). В историческом смысле слова «шахта» — это вертикальная выработка от поверхности до разрабатываемых горизонтов. Слово «шахта» — немецкого происхождения, родственное словам Schaft (‘скребок’) и глаголу shaben (‘скоблить’). Вместо слова «шахта» в значении «предприятие» употреблялись наименования «рудник», либо «копь» (родство с глаголом «копать» очевидно).",
+            "img": `${GLOSSARY_IMAGES}img-2.jpg`,
+            "type": "закрытая добыча"
+        },
+        {
+            "title": "Шахта",
+            "text": "Обозначение угледобывающего предприятия с «закрытой» (подземной) добычей (при открытых разработках предприятие именуется «разрезом», см. статью «Разрез»). В историческом смысле слова «шахта» — это вертикальная выработка от поверхности до разрабатываемых горизонтов. Слово «шахта» — немецкого происхождения, родственное словам Schaft (‘скребок’) и глаголу shaben (‘скоблить’). Вместо слова «шахта» в значении «предприятие» употреблялись наименования «рудник», либо «копь» (родство с глаголом «копать» очевидно).",
+            "img": `${GLOSSARY_IMAGES}img-3.jpg`,
+            "type": "Неведомая Хуета"
+        },
+
+        {
+            "title": "Каменный уголь",
+            "text": "Твердое горючее полезное ископаемое в земной коре, которое залегает в форме пластов.",
+            "img": `${GLOSSARY_IMAGES}img-1.jpg`,
+            "type": "Неведомая Хуета"
+        },
+
     ]
-
-
+}
 
 export const courceDownload =
     [

@@ -1,6 +1,6 @@
 <script>
-import { _GET_DEVICE_TYPE } from "@/globals/Methods.js"
-console.log(_GET_DEVICE_TYPE())
+import { _GET_DEVICE_TYPE } from "@/globals/Methods.js";
+console.log(_GET_DEVICE_TYPE());
 
 import Menu from "./TheMenu.vue";
 import Glossary from "./TheGlossary.vue";
@@ -60,6 +60,16 @@ export default {
         closeMenu() {
             this.toggleMenu();
             this.activeComponent = shallowRef(Menu);
+            this.navButtons.forEach((item, ndx) => {
+                if (
+                    this.menuState &&
+                    !this.navButtons.some((item) => item.active)
+                ) {
+                    item.name === "Содержание" ? (item.active = true) : "";
+                    return;
+                }
+                item.active = false;
+            });
         },
     },
 
@@ -68,7 +78,7 @@ export default {
         ...mapGetters("header", ["menuState"]),
 
         getDeviceType() {
-            return _GET_DEVICE_TYPE() === "desktop"
+            return _GET_DEVICE_TYPE() === "desktop";
         },
 
         getMenuClass() {
@@ -76,11 +86,7 @@ export default {
                 "menu__nav-open": this.menuState,
             };
         },
-        getHeaderClass() {
-            return {
-                header__open: this.menuState,
-            };
-        },
+
         getBurgerClass() {
             return {
                 header__button_open: this.menuState,
@@ -112,67 +118,107 @@ export default {
             };
         },
         getBurgerActive() {
-            return { active: this.menuState }
-
-        }
+            return { active: this.menuState };
+        },
     },
 };
 </script>
 
 <template>
     <div>
-        <div class="header" :class="getHeaderClass">
+        <div class="header">
             <div class="header__container">
                 <SvgIcon name="logo" class="header__logo"></SvgIcon>
 
                 <div class="header__navigation" v-if="getDeviceType">
-                    <button v-for="(navBtn, ndx) in navButtons" :key="navBtn.name" class="header-btn"
-                        :class="addHeaderButtonClass(ndx)" @click="showNavfromHeader(ndx)">
-                        <span class="header__navigation_text text-m" v-if="navBtn.name != 'Глоссарий'">
+                    <button
+                        v-for="(navBtn, ndx) in navButtons"
+                        :key="navBtn.name"
+                        class="header-btn"
+                        :class="addHeaderButtonClass(ndx)"
+                        @click="showNavfromHeader(ndx)"
+                    >
+                        <span
+                            class="header__navigation_text text-m"
+                            v-if="navBtn.name != 'Глоссарий'"
+                        >
                             {{ navBtn.name }}
                         </span>
                     </button>
                 </div>
 
                 <div class="flex">
-
-                    <button class="header-btn header-btn__gloss" :class="addHeaderButtonClass(getGlossary)"
-                        @click="showNavfromHeader(getGlossary)">
+                    <button
+                        class="header-btn header-btn__gloss"
+                        :class="addHeaderButtonClass(getGlossary)"
+                        @click="showNavfromHeader(getGlossary)"
+                    >
                         <SvgIcon name="gloss" class="header__icon"></SvgIcon>
 
-                        <span class="header__navigation_text text-m" v-if="getDeviceType">
+                        <span
+                            class="header__navigation_text text-m"
+                            v-if="getDeviceType"
+                        >
                             {{ getGlossary.name }}
                         </span>
                     </button>
 
-                    <button class="header__burger" :class="getBurgerActive" @click="closeMenu" v-if="!getDeviceType">
+                    <button
+                        class="header__burger"
+                        :class="getBurgerActive"
+                        @click="closeMenu"
+                        v-if="!getDeviceType"
+                    >
                         <span class="header__burger_line"></span>
                         <span class="header__burger_line"></span>
                     </button>
-
                 </div>
-
-
-
-
-
-
-
             </div>
         </div>
 
-        <div class="menu__nav" :class="getMenuClass">
-            <div class="menu__contant" :class="gatMenuContant">
-                <div class="menu__container">
-                    <transition mode="out-in" name="menu">
-                        <component :is="activeComponent" v-if="activeComponent" />
-                    </transition>
-                </div>
-                <button class="menu__close" @click="closeMenu" v-if="getDeviceType">
-                    <SvgIcon name="close"></SvgIcon>
+        <transition mode="out-in" name="menu">
+            <div
+                class="header__navigation header__navigation_mobile"
+                v-if="!getDeviceType && menuState"
+            >
+                <button
+                    v-for="(navBtn, ndx) in navButtons"
+                    :key="navBtn.name"
+                    class="header-btn"
+                    :class="addHeaderButtonClass(ndx)"
+                    @click="showNavfromHeader(ndx)"
+                >
+                    <span
+                        class="header__navigation_text text-m"
+                        v-if="navBtn.name != 'Глоссарий'"
+                    >
+                        {{ navBtn.name }}
+                    </span>
                 </button>
             </div>
-        </div>
+        </transition>
+
+        <transition mode="out-in" name="menu-open">
+            <div class="menu__nav" v-if="menuState">
+                <div class="menu__contant" :class="gatMenuContant">
+                    <div class="menu__container">
+                        <transition mode="out-in" name="menu">
+                            <component
+                                :is="activeComponent"
+                                v-if="activeComponent"
+                            />
+                        </transition>
+                    </div>
+                    <button
+                        class="menu__close"
+                        @click="closeMenu"
+                        v-if="getDeviceType"
+                    >
+                        <SvgIcon name="close"></SvgIcon>
+                    </button>
+                </div>
+            </div>
+        </transition>
     </div>
 </template>
 

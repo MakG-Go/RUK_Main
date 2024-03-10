@@ -27,16 +27,23 @@
         text-align: right;
     }
 
+    &-demi {
+        font-family: $Demi !important;
+    }
+    &-bold {
+        font-family: $Bold !important;
+    }
+
     &-m {
         font-size: clamp(0.875rem, 10vw - 1rem, 1rem);
-        &--fix{
+        &--fix {
             font-size: 1rem;
         }
     }
 
     &-s {
         font-size: clamp(0.75rem, 10vw - 1rem, 0.875rem);
-        &--fix{
+        &--fix {
             font-size: 0.875rem;
         }
     }
@@ -54,7 +61,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-    font-family: $Bold !important;
+    font-family: $Bold;
     font-weight: bold;
     line-height: 1;
 }
