@@ -7,6 +7,7 @@ export default {
             typeData: null,
             literData: null,
             currentLiter: null,
+            currentType: null,
             inputText: null,
             allLiter: true,
             allTypes: true,
@@ -50,6 +51,7 @@ export default {
 
         getAllTypes() {
             this.allTypes = true;
+            this.currentType = null;
             this.typeData = null;
             if (this.currentLiter != null) {
                 this.filterLiter(this.currentLiter);
@@ -76,7 +78,7 @@ export default {
 
         filterType(type) {
             this.allTypes = false;
-
+            this.currentType = type;
             const descr = this.getAllDescriptions.filter(
                 (item) => item.type.toUpperCase() === type.toUpperCase()
             );
@@ -163,9 +165,43 @@ export default {
 
             return compliteType;
         },
+
+        getLinkActiveClass() {
+            return (liter) => {
+                return {
+                    active:
+                        liter === this.currentLiter &&
+                        this.currentLiter != null,
+                    all: liter === undefined && this.currentLiter === null,
+                };
+            };
+        },
+
+        getTypeActiveClass() {
+            return (type) => {
+                return {
+                    active:
+                        type === this.currentType && this.currentType != null,
+                    all: type === undefined && this.currentType === null,
+                };
+            };
+        },
     },
 
-    mounted() {},
+    mounted() {
+        this.$nextTick(() => {
+            this.$nextTick(() => {
+                const topPos = Math.round(
+                    Math.abs(
+                        this.$refs.scroll.ps.element.getBoundingClientRect().top
+                    )
+                );
+
+                this.$refs.scroll.ps.element.style.height =
+                    "calc(100dvh - " + topPos + "px - 3rem)";
+            });
+        });
+    },
 };
 </script>
 
@@ -181,15 +217,19 @@ export default {
                 v-html="getGlossaryHeader.description"
             ></p>
         </div>
+
         <div class="glossary__link_container">
-            <button class="glossary__link" @click="getAllLiter">
+            <button
+                :class="['glossary__link', getLinkActiveClass()]"
+                @click="getAllLiter"
+            >
                 <span>Все</span>
             </button>
             <div
                 v-for="(glosData, key) in getCurrentData"
                 :key="glosData.description + key + Date.now()"
                 @click="filterLiter(glosData.liter)"
-                class="glossary__link"
+                :class="['glossary__link', getLinkActiveClass(glosData.liter)]"
             >
                 <span>{{ glosData.liter }}</span>
             </div>
@@ -204,14 +244,18 @@ export default {
                 :placeholder="getInputPlaceholder"
             />
 
-            <button class="glossary__link" @click="getAllTypes">
+            <button
+                :class="['glossary__link', getTypeActiveClass()]"
+                @click="getAllTypes"
+            >
                 <span>Все</span>
             </button>
+
             <button
-                class="glossary__link"
                 v-for="(type, typeKey) in getDataType"
                 :key="type + typeKey + Date.now()"
                 @click="filterType(type)"
+                :class="['glossary__link', getTypeActiveClass(type)]"
             >
                 <span v-html="type"></span>
             </button>

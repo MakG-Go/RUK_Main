@@ -1,6 +1,6 @@
 .materials {
     &__scroll {
-        height: 80dvh;
+        height: calc(100dvh - 6rem - 65px);
         padding: 0.625rem 1.5rem;
     }
 
@@ -16,14 +16,16 @@
         border-radius: 32px;
         padding: 2rem 2.5rem;
         cursor: pointer;
-        width: 48%;
+        width: 100%;
+        max-width: 48%;
 
         transition-property: background-color;
         transition-duration: 0.25s;
         transition-timing-function: ease-in-out;
 
         @media (hover: none) {
-            width: 100%;
+            max-width: 100%;
+            padding: 1.5rem;
         }
     }
 

@@ -139,13 +139,13 @@
     }
 
     &__container {
-        max-height: 80dvh;
+        max-height: calc(100dvh - 6rem - 65px);
         overflow: hidden;
         height: 100%;
         width: 100%;
 
-        border-top: 2px solid rgba($white, 0.7);
-        border-bottom: 2px solid rgba($white, 0.7);
+        border-top: 1px solid rgba($white, 0.7);
+        border-bottom: 1px solid rgba($white, 0.7);
     }
 
     &__close {
@@ -198,7 +198,7 @@
     }
 
     &__scroll {
-        height: 80dvh;
+        height: calc(100dvh - 6rem - 65px);
     }
 }
 

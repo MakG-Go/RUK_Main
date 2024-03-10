@@ -25,11 +25,15 @@
 }
 
 .menu-open-enter-from {
-    transform: translateY(-100%);
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateX(100%);
 }
 
 .menu-open-leave-to {
-    transform: translateY(-100%);
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateX(100%);
 }
 
 /*--------------------------------------*/
