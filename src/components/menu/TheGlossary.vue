@@ -13,6 +13,7 @@ export default {
             allTypes: true,
         };
     },
+
     methods: {
         createSlice(arr) {
             let simbols = [];
@@ -65,6 +66,7 @@ export default {
                     return [...a, ...b];
                 });
         },
+
         filterText() {
             console.log(this.inputText);
         },
@@ -189,6 +191,7 @@ export default {
     },
 
     mounted() {
+        console.log("hellow world");
         this.$nextTick(() => {
             this.$nextTick(() => {
                 const topPos = Math.round(
@@ -283,6 +286,13 @@ export default {
                         </div>
                     </li>
                 </ul>
+            </div>
+            <div v-if="getCurrentData.length == 0">
+                <h3 class="text-white">
+                    В разделе "{{ currentType }}" нет определение на букву "{{
+                        currentLiter
+                    }}"
+                </h3>
             </div>
         </perfect-scrollbar>
     </div>
