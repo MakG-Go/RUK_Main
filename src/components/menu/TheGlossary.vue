@@ -163,8 +163,6 @@ export default {
                 return item.charAt(0).toUpperCase() + item.slice(1);
             });
 
-            console.log(compliteType);
-
             return compliteType;
         },
 
@@ -191,18 +189,15 @@ export default {
     },
 
     mounted() {
-        console.log("hellow world");
         this.$nextTick(() => {
-            this.$nextTick(() => {
-                const topPos = Math.round(
-                    Math.abs(
-                        this.$refs.scroll.ps.element.getBoundingClientRect().top
-                    )
-                );
+            const topPos = Math.round(
+                Math.abs(
+                    this.$refs.scroll.ps.element.getBoundingClientRect().top
+                )
+            );
 
-                this.$refs.scroll.ps.element.style.height =
-                    "calc(100dvh - " + topPos + "px - 3rem)";
-            });
+            this.$refs.scroll.ps.element.style.height =
+                "calc(100dvh - " + topPos + "px - 3rem)";
         });
     },
 };
