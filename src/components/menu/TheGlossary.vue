@@ -67,8 +67,8 @@ export default {
                 });
         },
 
-        filterText() {
-            console.log(this.inputText);
+        filterText($event) {
+            console.log($event.target.value);
         },
 
         filterLiter(liter) {
@@ -216,6 +216,8 @@ export default {
             ></p>
         </div>
 
+        <!-- Фильтрация по буквам -->
+
         <div class="glossary__link_container">
             <button
                 :class="['glossary__link', getLinkActiveClass()]"
@@ -236,7 +238,7 @@ export default {
         <div class="glossary__type_container">
             <input
                 class="glossary__input"
-                @keyup="filterText"
+                @keyup="filterText($event)"
                 v-model="inputText"
                 type="text"
                 :placeholder="getInputPlaceholder"
