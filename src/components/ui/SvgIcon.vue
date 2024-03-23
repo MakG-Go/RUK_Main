@@ -3,7 +3,7 @@
         <use :href="symbolId" :fill="color" />
     </svg>
 </template>
-  
+
 <script>
 /** For composition API */
 import { defineComponent, computed } from "vue";
