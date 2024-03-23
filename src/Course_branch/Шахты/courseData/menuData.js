@@ -26,7 +26,10 @@ export const courseGlossary =
     glossaryProps: {
         "title": "Глоссарий",
         "description": "Легко просматривайте все содержимое вашей библиотеки, используя поиск и фильтрацию для скорости и точности поиска",
-        "placeholder": "Найти слово, аббревиатуру"
+        "placeholder": "Поиск по глоссарию",
+        "sidebarTitle": "Фильтрация",
+        "showAllBtnText": "Все типы",
+        "showAllFiltersText": "Все фильтры "
     },
     glossaryData: [
         {

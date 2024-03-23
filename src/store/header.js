@@ -4,6 +4,7 @@ export default {
     namespaced: true,
     state: {
         open: false,
+        sidebar: false,
         menu: courseMenu,
         glossary: courseGlossary,
         materials: courceDownload
@@ -14,6 +15,7 @@ export default {
         glossary: (state) => state.glossary,
         materials: (state) => state.materials,
         menuState: (state) => state.open,
+        sideBarState: (state) => state.sidebar,
         curentPage: (state) => (name) => state.menu.routs.findIndex((el) => el.pageRoute === name)
 
     },
@@ -21,12 +23,19 @@ export default {
         toggleMenu(state) {
             state.open = !state.open
         },
+        togleSidebar(state) {
+            state.sidebar = !state.sidebar
+        }
     },
 
     actions: {
         toggleMenu({ commit }) {
             commit('toggleMenu')
         },
+        togleSidebar({ commit }) {
+            commit('togleSidebar')
+        }
+
     },
 }
 

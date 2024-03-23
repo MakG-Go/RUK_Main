@@ -1,20 +1,25 @@
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
+import SvgIcon from "../ui/SvgIcon.vue";
 export default {
     name: "Glossary",
+    components: { SvgIcon },
     data() {
         return {
             typeData: null,
             literData: null,
             currentLiter: null,
             currentType: null,
-            inputText: null,
+            inputData: null,
             allLiter: true,
             allTypes: true,
+            selectType: "",
         };
     },
 
     methods: {
+        ...mapActions("header", ["togleSidebar"]),
+
         createSlice(arr) {
             let simbols = [];
             let glossaryData = [];
@@ -67,9 +72,26 @@ export default {
                 });
         },
 
+        /** Поиск */
+
         filterText($event) {
-            console.log($event.target.value);
+            let curentValue = $event.target.value.toLowerCase();
+
+            if (curentValue.length === 0) {
+                return (this.inputData = null);
+            }
+
+            let checkData = this.getDescriptions(this.getCurrentData);
+            let strtInputData = checkData.filter(
+                (item) => item.title.toLowerCase().includes(curentValue)
+                // ||
+                // item.text.toLowerCase().includes(curentValue)
+            );
+
+            this.inputData = this.createSlice(strtInputData);
         },
+
+        /** Фильтрация по буквам */
 
         filterLiter(liter) {
             this.allLiter = false;
@@ -77,6 +99,8 @@ export default {
             let literArr = JSON.parse(JSON.stringify(this.getLiterData));
             this.literData = literArr.filter((item) => item.liter === liter);
         },
+
+        /** Создание data после выбора фильтра */
 
         filterType(type) {
             this.allTypes = false;
@@ -86,9 +110,13 @@ export default {
             );
             this.typeData = this.createSlice(descr);
 
-            if (this.currentLiter != null) {
-                this.filterLiter(this.currentLiter);
-            }
+            // if (this.currentLiter != null) {
+            //     this.filterLiter(this.currentLiter);
+            // }
+        },
+
+        showSidebar() {
+            this.togleSidebar();
         },
 
         scrollTo(key) {
@@ -108,9 +136,9 @@ export default {
     },
 
     computed: {
-        ...mapGetters("header", ["glossary"]),
+        ...mapGetters("header", ["glossary", "sideBarState"]),
 
-        getGlossaryHeader() {
+        getGlossaryProps() {
             return this.glossary.glossaryProps;
         },
 
@@ -122,6 +150,13 @@ export default {
             return this.createSlice(this.glossary.glossaryData);
         },
 
+        getCompliteData() {
+            if (this.inputData !== null) {
+                return this.inputData;
+            }
+            return this.getCurrentData;
+        },
+
         getStartData() {
             return JSON.parse(JSON.stringify(this.createGlossData));
         },
@@ -130,12 +165,12 @@ export default {
             if (!this.allTypes && this.allLiter) {
                 return this.typeData;
             }
-            if (!this.allTypes && !this.allLiter) {
-                return this.literData;
-            }
-            if (this.allTypes && !this.allLiter) {
-                return this.literData;
-            }
+            // if (!this.allTypes && !this.allLiter) {
+            //     return this.literData;
+            // }
+            // if (this.allTypes && !this.allLiter) {
+            //     return this.literData;
+            // }
             return this.getStartData;
         },
 
@@ -186,6 +221,12 @@ export default {
                 };
             };
         },
+
+        getFilterActive() {
+            return {
+                active: this.selectType.length > 0,
+            };
+        },
     },
 
     mounted() {
@@ -205,20 +246,9 @@ export default {
 
 <template>
     <div class="glossary__container">
-        <div class="glossary__header mb-40 mb-xs-15">
-            <h2
-                class="text-white text-demi mb-15 mb-xs-15"
-                v-html="getGlossaryHeader.title"
-            ></h2>
-            <p
-                class="text-white text-m"
-                v-html="getGlossaryHeader.description"
-            ></p>
-        </div>
-
         <!-- Фильтрация по буквам -->
 
-        <div class="glossary__link_container">
+        <!-- <div class="glossary__link_container">
             <button
                 :class="['glossary__link', getLinkActiveClass()]"
                 @click="getAllLiter"
@@ -233,37 +263,34 @@ export default {
             >
                 <span>{{ glosData.liter }}</span>
             </div>
-        </div>
+        </div> -->
 
         <div class="glossary__type_container">
-            <input
-                class="glossary__input"
-                @keyup="filterText($event)"
-                v-model="inputText"
-                type="text"
-                :placeholder="getInputPlaceholder"
-            />
+            <div class="glossary__search">
+                <SvgIcon name="search" class="glossary__icon" />
+                <input
+                    class="glossary__input"
+                    @keyup="filterText($event)"
+                    type="text"
+                    :placeholder="getInputPlaceholder"
+                />
+            </div>
 
             <button
-                :class="['glossary__link', getTypeActiveClass()]"
-                @click="getAllTypes"
+                :class="['glossary__filters', getFilterActive]"
+                @click="togleSidebar"
             >
-                <span>Все</span>
-            </button>
-
-            <button
-                v-for="(type, typeKey) in getDataType"
-                :key="type + typeKey + Date.now()"
-                @click="filterType(type)"
-                :class="['glossary__link', getTypeActiveClass(type)]"
-            >
-                <span v-html="type"></span>
+                <SvgIcon name="setting"></SvgIcon>
+                <span
+                    class="glossary__filters_text"
+                    v-html="getGlossaryProps.showAllFiltersText"
+                ></span>
             </button>
         </div>
 
         <perfect-scrollbar class="glossary__scroll" ref="scroll">
             <div
-                v-for="(glosData, key) in getCurrentData"
+                v-for="(glosData, key) in getCompliteData"
                 :key="key + Date.now()"
             >
                 <ul class="glossary__contant" ref="liter">
@@ -272,12 +299,14 @@ export default {
                         v-for="literData in glosData.description"
                         :key="literData.title + Date.now()"
                     >
-                        <div class="glossary__title">
-                            <span>{{ literData.title }}</span>
+                        <div class="glossary__description">
+                            <div class="glossary__title">
+                                <span>{{ literData.title }}</span>
+                            </div>
+                            <p class="glossary__text">
+                                {{ literData.text }}
+                            </p>
                         </div>
-                        <p class="glossary__text">
-                            {{ literData.text }}
-                        </p>
                         <div class="glossary__image">
                             <img :src="literData.img" alt="" />
                         </div>
@@ -292,6 +321,55 @@ export default {
                 </h3>
             </div>
         </perfect-scrollbar>
+
+        <transition name="gloss-open" mode="out-in">
+            <div class="glossary__sidebar" v-if="sideBarState">
+                <div class="glossary__sidebar_header">
+                    <h3 v-html="getGlossaryProps.sidebarTitle"></h3>
+                    <button
+                        class="glossary__sidebar_close"
+                        @click="togleSidebar"
+                    >
+                        <SvgIcon name="close"></SvgIcon>
+                    </button>
+                </div>
+                <hr class="hr hr-gray" />
+                <div class="radio">
+                    <input
+                        id="all"
+                        type="radio"
+                        value=""
+                        v-model="selectType"
+                        @change="getAllTypes"
+                    />
+                    <label
+                        for="all"
+                        v-html="getGlossaryProps.showAllBtnText"
+                    ></label>
+                </div>
+                <div
+                    class="radio"
+                    v-for="(type, typeKey) in getDataType"
+                    :key="type + typeKey + Date.now()"
+                >
+                    <input
+                        :id="type + typeKey + Date.now()"
+                        type="radio"
+                        :value="type"
+                        v-model="selectType"
+                        @change="filterType(type)"
+                    />
+                    <label
+                        :for="type + typeKey + Date.now()"
+                        v-html="type"
+                    ></label>
+                </div>
+            </div>
+        </transition>
+
+        <transition name="gloss-dark" mode="out-in">
+            <div class="glossary__sidebar_dark" v-if="sideBarState"></div>
+        </transition>
     </div>
 </template>
 

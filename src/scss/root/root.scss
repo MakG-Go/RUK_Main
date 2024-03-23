@@ -8,21 +8,20 @@ body {
     }
 }
 
-// hr {
-//     border: none;
-//     border-top: solid 1px;
-//     margin: 0;
-//     &.hr {
-//         border-top-color: rgb(209, 209, 209);
-//         margin-bottom: 1rem;
-//         &-red {
-//             border: none;
-//             width: 100%;
-//             height: 3px;
-//             background-color: $red;
-//         }
-//     }
-// }
+hr {
+    border: none;
+    border-top: solid 1px;
+    margin: 0;
+    &.hr {
+        border-top-color: transparent;
+        border: none;
+        width: 100%;
+        height: 2px;
+        &-gray {
+            background-color: $gray_2;
+        }
+    }
+}
 
 .wrapper-course {
     height: 100dvh;

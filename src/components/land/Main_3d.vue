@@ -15,7 +15,7 @@ import {
     PANORAM_PARAMS,
 } from "&/courseData/mainData.js";
 import { CreateModel } from "@/scripts/model_constructor.js";
-import MainPreloader from '@/components/land/Preloader.vue'
+import MainPreloader from "@/components/land/Preloader.vue";
 
 import _ from "lodash";
 // import { acceleratedRaycast } from "three-mesh-bvh";
@@ -32,12 +32,12 @@ import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPa
 export default {
     name: "Main",
     components: {
-        MainPreloader
+        MainPreloader,
     },
 
     props: {
         modelsData: { type: Array, required: true },
-        currentLaer: { type: Object, default: () => { } },
+        currentLaer: { type: Object, default: () => {} },
         selected: { type: String, default: null },
         descripton: { type: Boolean, default: false },
         panoram: { type: Boolean, default: false },
@@ -88,6 +88,7 @@ export default {
 
             // this.createGuiParams();
         },
+
         getCameraParams() {
             this.camera = new THREE.PerspectiveCamera(
                 45,
@@ -176,7 +177,6 @@ export default {
         },
 
         getCanvasSize() {
-
             this.getSizes.width = window.innerWidth;
             this.getSizes.height = window.innerHeight;
 
@@ -185,13 +185,8 @@ export default {
             this.camera.updateProjectionMatrix();
 
             // Update renderer
-            this.renderer.setSize(
-                this.getSizes.width,
-                this.getSizes.height
-            );
-            this.renderer.setPixelRatio(
-                Math.min(window.devicePixelRatio, 2)
-            );
+            this.renderer.setSize(this.getSizes.width, this.getSizes.height);
+            this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         },
 
         /** POSTPROCESSING */
@@ -270,7 +265,7 @@ export default {
                         opacity: 1,
                     });
                     this.$emit("model-loaded", true);
-                    this.loadComplite = true
+                    this.loadComplite = true;
                     // this.$refs.preloader.classList.remove("active");
                     // this.loadPercetn = 0;
                     // console.log("Loaded");
@@ -523,7 +518,7 @@ export default {
             this.renderer = null;
             this.camera = null;
             this.scene = null;
-            this.loadPercetn = 0
+            this.loadPercetn = 0;
         },
 
         destroyModel() {
@@ -704,13 +699,15 @@ export default {
     unmounted() {
         cancelAnimationFrame(this.animationFrameId);
     },
-
 };
 </script>
 
 <template >
     <div @click="stopStartAutoRotate">
-        <MainPreloader :current-procent="loadPercetn" :load-complite="loadComplite"></MainPreloader>
+        <MainPreloader
+            :current-procent="loadPercetn"
+            :load-complite="loadComplite"
+        ></MainPreloader>
         <div ref="webGl" class="main" :class="getActiveClass"></div>
     </div>
 </template>

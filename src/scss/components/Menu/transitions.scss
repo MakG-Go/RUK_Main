@@ -38,6 +38,40 @@
 
 /*--------------------------------------*/
 
+.gloss-open-enter-active,
+.gloss-open-leave-active {
+    transition: 0.3s;
+}
+
+.gloss-open-enter-from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateX(100%);
+}
+
+.gloss-open-leave-to {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateX(100%);
+}
+
+.gloss-dark-enter-active,
+.gloss-dark-leave-active {
+    transition: 0.3s;
+}
+
+.gloss-dark-enter-from {
+    opacity: 0;
+    filter: blur(10px);
+}
+
+.gloss-dark-leave-to {
+    opacity: 0;
+    filter: blur(10px);
+}
+
+/*--------------------------------------*/
+
 .navigation-enter-active,
 .navigation-leave-active {
     transition: 0.25s;

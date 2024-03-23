@@ -152,6 +152,10 @@
         }
     }
 
+    &.sidebar {
+        transform: translateY(-100%);
+    }
+
     @media (hover: none) {
         padding: 1rem;
         border-radius: 1rem;

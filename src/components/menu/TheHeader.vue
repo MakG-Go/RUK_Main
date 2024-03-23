@@ -75,7 +75,7 @@ export default {
 
     computed: {
         ...mapGetters("status", ["visitTotal", "visit", "objectivs"]),
-        ...mapGetters("header", ["menuState"]),
+        ...mapGetters("header", ["menuState", "sideBarState"]),
 
         getDeviceType() {
             return _GET_DEVICE_TYPE() === "desktop";
@@ -92,11 +92,13 @@ export default {
                 header__button_open: this.menuState,
             };
         },
+
         gatMenuContant() {
             return {
                 menu__contant_open: this.menuState,
             };
         },
+
         getGlossary() {
             return this.navButtons.filter(
                 (item) => item.name === "Глоссарий"
@@ -117,8 +119,15 @@ export default {
                 }
             };
         },
+
         getBurgerActive() {
             return { active: this.menuState };
+        },
+
+        addSidebarOpenClass() {
+            return {
+                sidebar: this.sideBarState,
+            };
         },
     },
 };
@@ -126,7 +135,7 @@ export default {
 
 <template>
     <div>
-        <div class="header">
+        <div :class="['header', addSidebarOpenClass]">
             <div class="header__container">
                 <SvgIcon name="logo" class="header__logo"></SvgIcon>
 
