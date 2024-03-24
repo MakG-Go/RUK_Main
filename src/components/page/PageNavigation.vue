@@ -97,35 +97,45 @@ export default {
 };
 </script>
 
-<template lang="">
+<template>
     <aside>
-        
-        <!-- {{getNavigationData}} -->
         <ul class="page-navigation">
             <!-- <p>{{check}}</p> -->
             <li
-                v-for="(
-                    section, sectionKey
-                ) in getNavigationData.scrollPage"
+                v-for="(section, sectionKey) in getNavigationData.scrollPage"
                 class=""
                 :key="section.name"
             >
                 <router-link
-                    :class="['cursor-default',getActivatedSection(section.hash)]"
+                    :class="[
+                        'cursor-default',
+                        getActivatedSection(section.hash),
+                    ]"
                     :to="{
                         name: section.pageRoute,
                         hash: section.hash,
                     }"
-                    ><div class="page-navigation__item" :class="[getActivatedSection(section.hash), getCurentSection(section.hash)]">
-                        <span class="page-navigation__text">{{ section.name }}</span>
+                    ><div
+                        class="page-navigation__item"
+                        :class="[
+                            getActivatedSection(section.hash),
+                            getCurentSection(section.hash),
+                        ]"
+                    >
+                        <span class="page-navigation__text">{{
+                            section.name
+                        }}</span>
                     </div>
-                    <div class="page-navigation__line" :class="getActivatedSection(section.hash)" v-if="getLastBoolit(sectionKey)"></div>
-            
+                    <div
+                        class="page-navigation__line"
+                        :class="getActivatedSection(section.hash)"
+                        v-if="getLastBoolit(sectionKey)"
+                    ></div>
                 </router-link>
             </li>
-         </ul>
+        </ul>
     </aside>
 </template>
 
-<style lang="">
+<style >
 </style>
