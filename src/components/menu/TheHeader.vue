@@ -188,7 +188,7 @@ export default {
         <transition mode="out-in" name="menu">
             <div
                 class="header__navigation header__navigation_mobile"
-                v-if="!getDeviceType && menuState"
+                v-if="!getDeviceType && menuState && !sideBarState"
             >
                 <button
                     v-for="(navBtn, ndx) in navButtons"

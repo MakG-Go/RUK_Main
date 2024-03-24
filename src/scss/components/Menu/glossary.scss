@@ -57,6 +57,45 @@
             justify-content: space-between;
         }
 
+        &_subtitle {
+            display: flex;
+            // justify-content: space-between;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        &_clear {
+            position: relative;
+            transition-property: color;
+            transition-duration: 0.25s;
+            transition-timing-function: ease-in-out;
+            cursor: pointer;
+            &::after {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                width: 0%;
+                content: ".";
+                color: transparent;
+                background: $blue_1;
+                height: 2px;
+                transition-property: width;
+                transition-duration: 0.25s;
+                transition-timing-function: ease-in-out;
+            }
+
+            @media (hover: hover) {
+                &:hover {
+                    color: $blue_1;
+                    &::after {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
         &_close {
             cursor: pointer;
             width: fit-content;

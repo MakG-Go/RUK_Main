@@ -11,6 +11,7 @@ export default {
         return {
             activatedSection: [],
             currentSection: "",
+            check: "",
         };
     },
     methods: {
@@ -22,12 +23,14 @@ export default {
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
+                    this.check = entry.intersectionRect.y;
                     if (entry.intersectionRatio > this.observe) {
                         this.checkActive(entry.target.id);
                         this.currentSection = entry.target.id;
                     }
                 });
             }, options);
+
             document.querySelectorAll(".js-observer").forEach((section) => {
                 observer.observe(section);
             });
@@ -77,6 +80,7 @@ export default {
                 };
             };
         },
+
         createThreshold() {
             let thresh = [];
             for (let i = 0; i <= this.threshhold; i++) {
@@ -94,8 +98,10 @@ export default {
 
 <template lang="">
     <aside>
+        
         <!-- {{getNavigationData}} -->
         <ul class="page-navigation">
+            <p>{{check}}</p>
             <li
                 v-for="(
                     section, sectionKey
@@ -113,6 +119,7 @@ export default {
                         <span class="page-navigation__text">{{ section.name }}</span>
                     </div>
                     <div class="page-navigation__line" :class="getActivatedSection(section.hash)" v-if="getLastBoolit(sectionKey)"></div>
+            
                 </router-link>
             </li>
          </ul>

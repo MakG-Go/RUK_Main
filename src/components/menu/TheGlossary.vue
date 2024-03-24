@@ -59,6 +59,7 @@ export default {
             this.allTypes = true;
             this.currentType = null;
             this.typeData = null;
+            this.selectType = "";
             if (this.currentLiter != null) {
                 this.filterLiter(this.currentLiter);
             }
@@ -300,9 +301,9 @@ export default {
                         :key="literData.title + Date.now()"
                     >
                         <div class="glossary__description">
-                            <div class="glossary__title">
+                            <h3 class="glossary__title">
                                 <span>{{ literData.title }}</span>
-                            </div>
+                            </h3>
                             <p class="glossary__text">
                                 {{ literData.text }}
                             </p>
@@ -322,7 +323,7 @@ export default {
             </div>
         </perfect-scrollbar>
 
-        <transition name="gloss-open" mode="out-in">
+        <transition name="sidebar-open" mode="out-in">
             <div class="glossary__sidebar" v-if="sideBarState">
                 <div class="glossary__sidebar_header">
                     <h3 v-html="getGlossaryProps.sidebarTitle"></h3>
@@ -334,18 +335,29 @@ export default {
                     </button>
                 </div>
                 <hr class="hr hr-gray" />
-                <div class="radio">
-                    <input
-                        id="all"
-                        type="radio"
-                        value=""
-                        v-model="selectType"
-                        @change="getAllTypes"
-                    />
-                    <label
-                        for="all"
+                <div class="glossary__sidebar_subtitle">
+                    <p
+                        class="text-l--fix text-medium"
+                        v-html="getGlossaryProps.sidebarSubTitle"
+                    ></p>
+                    <button
+                        class="text-m glossary__sidebar_clear"
+                        @click="getAllTypes"
                         v-html="getGlossaryProps.showAllBtnText"
-                    ></label>
+                    ></button>
+                    <!-- <div class="radio">
+                        <input
+                            id="all"
+                            type="radio"
+                            value=""
+                            v-model="selectType"
+                            @change="getAllTypes"
+                        />
+                        <label
+                            for="all"
+                            v-html="getGlossaryProps.showAllBtnText"
+                        ></label>
+                    </div> -->
                 </div>
                 <div
                     class="radio"
@@ -367,7 +379,7 @@ export default {
             </div>
         </transition>
 
-        <transition name="gloss-dark" mode="out-in">
+        <transition name="sidebar-dark" mode="out-in">
             <div class="glossary__sidebar_dark" v-if="sideBarState"></div>
         </transition>
     </div>

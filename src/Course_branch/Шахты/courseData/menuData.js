@@ -28,8 +28,11 @@ export const courseGlossary =
         "description": "Легко просматривайте все содержимое вашей библиотеки, используя поиск и фильтрацию для скорости и точности поиска",
         "placeholder": "Поиск по глоссарию",
         "sidebarTitle": "Фильтрация",
-        "showAllBtnText": "Все типы",
-        "showAllFiltersText": "Все фильтры "
+        "sidebarSubTitle": "Категория",
+        "showAllBtnText": "Сбросить",
+        "showAllFiltersText": "Все фильтры ",
+        "404text": "Термин отсутствует в глоссарии"
+
     },
     glossaryData: [
         {

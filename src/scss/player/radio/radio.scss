@@ -1,6 +1,4 @@
 .radio {
-    margin: 16px 0;
-
     &.radio-inline {
         display: inline-block;
     }
@@ -42,7 +40,9 @@
 
         &:before {
             left: 0;
-            top: 1px;
+            top: 0;
+            bottom: 0;
+            margin: auto;
             width: 25px;
             height: 25px;
             background: #fff;
@@ -51,20 +51,22 @@
             cursor: pointer;
 
             @media #{$breakpoint-xs-only} {
-                top: -1px;
+                // top: -1px;
             }
         }
 
         &:after {
-            top: 6px;
+            top: 0;
+            bottom: 0;
             left: 5px;
             width: 15px;
             height: 15px;
+            margin: auto;
             transform: scale(0);
             background: rgba($blue, 1);
 
             @media #{$breakpoint-xs-only} {
-                top: 4px;
+                // top: 4px;
             }
         }
     }
