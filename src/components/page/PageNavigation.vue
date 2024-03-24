@@ -17,7 +17,8 @@ export default {
     methods: {
         createObserver() {
             const options = {
-                root: document.querySelector(".wrapper-course"),
+                // root: document.querySelector(".wrapper-course"),
+                root: null,
                 threshold: this.createThreshold,
             };
 
