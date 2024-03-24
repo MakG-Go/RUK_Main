@@ -31,7 +31,7 @@ export const courseGlossary =
         "sidebarSubTitle": "Категория",
         "showAllBtnText": "Сбросить",
         "showAllFiltersText": "Все фильтры ",
-        "404text": "Термин отсутствует в глоссарии"
+        "emptyText": "Термин отсутствует в глоссарии"
 
     },
     glossaryData: [

@@ -102,7 +102,7 @@ export default {
         
         <!-- {{getNavigationData}} -->
         <ul class="page-navigation">
-            <p>{{check}}</p>
+            <!-- <p>{{check}}</p> -->
             <li
                 v-for="(
                     section, sectionKey
@@ -111,7 +111,7 @@ export default {
                 :key="section.name"
             >
                 <router-link
-                    :class="getActivatedSection(section.hash)"
+                    :class="['cursor-default',getActivatedSection(section.hash)]"
                     :to="{
                         name: section.pageRoute,
                         hash: section.hash,

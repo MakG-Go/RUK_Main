@@ -72,8 +72,10 @@
 
         cursor: pointer;
 
-        &:not(:last-child) {
-            margin-right: 1rem;
+        margin-right: 1rem;
+
+        &:last-child {
+            margin-right: 0;
         }
 
         &::after {
@@ -109,6 +111,10 @@
         &__gloss {
             display: flex;
             align-items: center;
+
+            @media (hover: none) {
+                margin-right: 1rem !important;
+            }
         }
 
         @media (hover: hover) {
@@ -121,6 +127,10 @@
                     width: 100%;
                 }
             }
+        }
+
+        @media (hover: none) {
+            margin: 0;
         }
     }
 

@@ -5,6 +5,7 @@ console.log(_GET_DEVICE_TYPE());
 import Menu from "./TheMenu.vue";
 import Glossary from "./TheGlossary.vue";
 import Materials from "./TheMaterials.vue";
+import Media from "./Media.vue";
 import SvgIcon from "../ui/SvgIcon.vue";
 
 import { shallowRef } from "vue";
@@ -12,7 +13,7 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
     name: "Header",
-    components: { Menu, Glossary, Materials, SvgIcon },
+    components: { Menu, Glossary, Materials, Media, SvgIcon },
     data() {
         return {
             navButtons: [
@@ -30,6 +31,11 @@ export default {
                     name: "Глоссарий",
                     active: false,
                     component: shallowRef(Glossary),
+                },
+                {
+                    name: "Фото и Видео",
+                    active: false,
+                    component: shallowRef(Media),
                 },
             ],
 

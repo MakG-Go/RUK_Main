@@ -53,35 +53,35 @@
     }
 
     &-xm {
-        font-size: clamp(1.5rem, 10vw - 1rem, 1.875rem);
+        font-size: clamp(1.5rem, 4vw - 1rem, 1.875rem);
         &--fix {
             font-size: 1.875rem;
         }
     }
 
     &-xs {
-        font-size: clamp(1.25rem, 10vw - 1rem, 1.5rem);
+        font-size: clamp(1.25rem, 4vw - 1rem, 1.5rem);
         &--fix {
             font-size: 1.5rem;
         }
     }
 
     &-l {
-        font-size: clamp(1rem, 10vw - 1rem, 1.25rem);
+        font-size: clamp(1rem, 4vw - 1rem, 1.25rem);
         &--fix {
             font-size: 1.25rem;
         }
     }
 
     &-m {
-        font-size: clamp(0.875rem, 10vw - 1rem, 1rem);
+        font-size: clamp(0.875rem, 4vw - 1rem, 1rem);
         &--fix {
             font-size: 1rem;
         }
     }
 
     &-s {
-        font-size: clamp(0.75rem, 10vw - 1rem, 0.875rem);
+        font-size: clamp(0.75rem, 4vw - 1rem, 0.875rem);
         &--fix {
             font-size: 0.875rem;
         }
@@ -106,25 +106,25 @@ h6,
 
 h1,
 .h1 {
-    font-size: clamp(3rem, 10vw - 1rem, 4rem);
+    font-size: clamp(3rem, 4vw - 1rem, 4rem);
 }
 
 h2,
 .h2 {
-    font-size: clamp(2.25rem, 10vw - 1rem, 3rem);
+    font-size: clamp(2.25rem, 4vw - 1rem, 3rem);
 }
 
 h3,
 .h3 {
-    font-size: clamp(1.75rem, 10vw - 1rem, 2.25rem);
+    font-size: clamp(1.75rem, 4vw - 1rem, 2.25rem);
 }
 
 h4,
 .h4 {
-    font-size: clamp(1.5rem, 10vw - 1rem, 1.75rem);
+    font-size: clamp(1.5rem, 4vw - 1rem, 1.75rem);
 }
 
 h5,
 .h5 {
-    font-size: clamp(1.25rem, 10vw - 1rem, 1.5rem);
+    font-size: clamp(1.25rem, 4vw - 1rem, 1.5rem);
 }

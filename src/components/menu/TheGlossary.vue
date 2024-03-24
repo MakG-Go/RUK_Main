@@ -228,6 +228,11 @@ export default {
                 active: this.selectType.length > 0,
             };
         },
+
+        getINput404() {
+            if (this.inputData === null) return;
+            return this.inputData.length === 0;
+        },
     },
 
     mounted() {
@@ -314,12 +319,8 @@ export default {
                     </li>
                 </ul>
             </div>
-            <div v-if="getCurrentData.length == 0">
-                <h3 class="text-white">
-                    В разделе "{{ currentType }}" нет определение на букву "{{
-                        currentLiter
-                    }}"
-                </h3>
+            <div v-if="getINput404">
+                <h3 class="text-white" v-html="getGlossaryProps.emptyText"></h3>
             </div>
         </perfect-scrollbar>
 
