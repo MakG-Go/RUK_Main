@@ -5,16 +5,19 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+
         .ps__rail-y {
             margin: 0;
         }
     }
+
     &__container {
         position: relative;
         display: flex;
         flex-direction: column;
         gap: 2rem;
     }
+
     &__header {
         padding-top: 1rem;
         width: 100%;
@@ -24,6 +27,7 @@
             max-width: 100%;
         }
     }
+
     &__sidebar {
         position: fixed;
         z-index: 1;
@@ -70,6 +74,7 @@
             transition-duration: 0.25s;
             transition-timing-function: ease-in-out;
             cursor: pointer;
+
             &::after {
                 position: absolute;
                 bottom: 0;
@@ -89,6 +94,7 @@
             @media (hover: hover) {
                 &:hover {
                     color: $blue_1;
+
                     &::after {
                         width: 100%;
                     }
@@ -147,7 +153,12 @@
         @media (hover: none) {
             width: 100%;
         }
+
+        &_acept {
+            margin-top: auto;
+        }
     }
+
     &__link {
         height: fit-content;
         padding: 0.5rem;
@@ -181,6 +192,7 @@
             }
         }
     }
+
     &__type {
         &_container {
             display: flex;
@@ -188,12 +200,14 @@
             gap: 0.875rem;
             align-items: center;
             margin-top: 1rem;
+
             @media (hover: none) {
                 flex-wrap: nowrap;
                 align-items: center;
             }
         }
     }
+
     &__search {
         font-size: clamp(0.875rem, 4vw - 1rem, 1rem);
         display: flex;
@@ -212,6 +226,7 @@
             padding: 0.5rem;
         }
     }
+
     &__input {
         width: 100%;
 
@@ -224,19 +239,23 @@
         &:focus {
             outline: none;
         }
+
         &::placeholder {
             color: rgba($white, 0.7);
         }
     }
+
     &__liter {
         color: white;
         margin-bottom: 0.5em;
     }
+
     &__contant {
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
     }
+
     &__card {
         display: flex;
         gap: 20px;
@@ -250,24 +269,29 @@
             padding: 1.5rem;
         }
     }
+
     &__description {
         display: flex;
         flex-direction: column;
         max-width: 48%;
+
         @media (hover: none) {
             max-width: 100%;
         }
     }
+
     &__title {
         font-family: "Franklin_Gothic_Demi", sans-serif;
         font-size: clamp(1.75rem, 4vw - 1rem, 2rem);
         color: $black;
         margin-bottom: 0.75rem;
     }
+
     &__text {
         font-size: clamp(0.875rem, 4vw - 1rem, 1rem);
         color: $black;
     }
+
     &__image {
         flex-grow: 1;
         border-radius: 24px;
@@ -277,6 +301,7 @@
             width: 100%;
         }
     }
+
     &__filters {
         display: flex;
         gap: 0.5rem;
@@ -295,10 +320,12 @@
         transition-property: transform, color, box-shadow;
         transition-duration: 0.25s;
         transition-timing-function: ease;
+
         svg {
             max-width: 20px;
             max-height: 20px;
         }
+
         use {
             fill: $black;
             transition-property: fill;
@@ -308,6 +335,7 @@
 
         &.active {
             position: relative;
+
             &::before {
                 position: absolute;
                 content: "";
@@ -317,33 +345,40 @@
                 height: 12px;
                 border-radius: 100%;
                 background-color: $orange;
+
                 @media (hover: none) {
                     left: 0;
                 }
             }
         }
+
         &_text {
             @media (hover: none) {
                 display: none;
             }
         }
+
         @media (hover: none) {
             padding: 0.5rem;
         }
+
         @media (hover: hover) {
             &:hover {
                 box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
                 transform: translateY(-2px);
                 color: $blue;
+
                 use {
                     fill: $blue;
                 }
             }
         }
     }
+
     &__icon {
         max-width: 20px;
         max-height: 20px;
+
         use {
             fill: $white;
         }

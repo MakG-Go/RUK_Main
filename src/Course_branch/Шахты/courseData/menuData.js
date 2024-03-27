@@ -30,6 +30,7 @@ export const courseGlossary =
         "sidebarTitle": "Фильтрация",
         "sidebarSubTitle": "Категория",
         "showAllBtnText": "Сбросить",
+        "aceptBtnText": "Применить",
         "showAllFiltersText": "Все фильтры ",
         "emptyText": "Термин отсутствует в глоссарии"
 

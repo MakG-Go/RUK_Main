@@ -14,6 +14,8 @@ export default {
             allLiter: true,
             allTypes: true,
             selectType: "",
+
+            sideBarAcept: false,
         };
     },
 
@@ -103,13 +105,16 @@ export default {
 
         /** Создание data после выбора фильтра */
 
-        filterType(type) {
+        filterType(event, type) {
+
             this.allTypes = false;
             this.currentType = type;
             const descr = this.getAllDescriptions.filter(
                 (item) => item.type.toUpperCase() === type.toUpperCase()
             );
             this.typeData = this.createSlice(descr);
+
+            this.sideBarAcept = event.target.checked
 
             // if (this.currentLiter != null) {
             //     this.filterLiter(this.currentLiter);
@@ -233,6 +238,13 @@ export default {
             if (this.inputData === null) return;
             return this.inputData.length === 0;
         },
+
+        getAcept() {
+
+            return this.sideBarAcept && this.typeData != null
+
+
+        }
     },
 
     mounted() {
@@ -274,37 +286,21 @@ export default {
         <div class="glossary__type_container">
             <div class="glossary__search">
                 <SvgIcon name="search" class="glossary__icon" />
-                <input
-                    class="glossary__input"
-                    @keyup="filterText($event)"
-                    type="text"
-                    :placeholder="getInputPlaceholder"
-                />
+                <input class="glossary__input" @keyup="filterText($event)" type="text"
+                    :placeholder="getInputPlaceholder" />
             </div>
 
-            <button
-                :class="['glossary__filters', getFilterActive]"
-                @click="togleSidebar"
-            >
+            <button :class="['glossary__filters', getFilterActive]" @click="togleSidebar">
                 <SvgIcon name="setting"></SvgIcon>
-                <span
-                    class="glossary__filters_text"
-                    v-html="getGlossaryProps.showAllFiltersText"
-                ></span>
+                <span class="glossary__filters_text" v-html="getGlossaryProps.showAllFiltersText"></span>
             </button>
         </div>
 
         <perfect-scrollbar class="glossary__scroll" ref="scroll">
-            <div
-                v-for="(glosData, key) in getCompliteData"
-                :key="key + Date.now()"
-            >
+            <div v-for="(glosData, key) in getCompliteData" :key="key + Date.now()">
                 <ul class="glossary__contant" ref="liter">
-                    <li
-                        class="glossary__card"
-                        v-for="literData in glosData.description"
-                        :key="literData.title + Date.now()"
-                    >
+                    <li class="glossary__card" v-for="literData in glosData.description"
+                        :key="literData.title + Date.now()">
                         <div class="glossary__description">
                             <h3 class="glossary__title">
                                 <span>{{ literData.title }}</span>
@@ -328,64 +324,37 @@ export default {
             <div class="glossary__sidebar" v-if="sideBarState">
                 <div class="glossary__sidebar_header">
                     <h3 v-html="getGlossaryProps.sidebarTitle"></h3>
-                    <button
-                        class="glossary__sidebar_close"
-                        @click="togleSidebar"
-                    >
+                    <button class="glossary__sidebar_close" @click="togleSidebar">
                         <SvgIcon name="close"></SvgIcon>
                     </button>
                 </div>
                 <hr class="hr hr-gray" />
                 <div class="glossary__sidebar_subtitle">
-                    <p
-                        class="text-l--fix text-medium"
-                        v-html="getGlossaryProps.sidebarSubTitle"
-                    ></p>
-                    <button
-                        class="text-m glossary__sidebar_clear"
-                        @click="getAllTypes"
-                        v-html="getGlossaryProps.showAllBtnText"
-                    ></button>
-                    <!-- <div class="radio">
-                        <input
-                            id="all"
-                            type="radio"
-                            value=""
-                            v-model="selectType"
-                            @change="getAllTypes"
-                        />
-                        <label
-                            for="all"
-                            v-html="getGlossaryProps.showAllBtnText"
-                        ></label>
-                    </div> -->
+                    <p class="text-l--fix text-medium" v-html="getGlossaryProps.sidebarSubTitle"></p>
+                    <button class="text-m glossary__sidebar_clear" @click="getAllTypes"
+                        v-html="getGlossaryProps.showAllBtnText"></button>
                 </div>
-                <div
-                    class="radio"
-                    v-for="(type, typeKey) in getDataType"
-                    :key="type + typeKey + Date.now()"
-                >
-                    <input
-                        :id="type + typeKey + Date.now()"
-                        type="radio"
-                        :value="type"
-                        v-model="selectType"
-                        @change="filterType(type)"
-                    />
-                    <label
-                        :for="type + typeKey + Date.now()"
-                        v-html="type"
-                    ></label>
+
+                <div class="radio" v-for="(type, typeKey) in getDataType" :key="type + typeKey + Date.now()">
+                    <input :id="type + typeKey + Date.now()" type="radio" :value="type" v-model="selectType"
+                        @change="filterType($event, type)" />
+                    <label :for="type + typeKey + Date.now()" v-html="type"></label>
                 </div>
+
+                <transition name="sidebar-acept">
+                    <button v-if="getAcept" class="glossary__sidebar_acept btn" @click="togleSidebar"
+                        v-html="getGlossaryProps.aceptBtnText">
+                    </button>
+                </transition>
+
             </div>
         </transition>
 
         <transition name="sidebar-dark" mode="out-in">
             <div class="glossary__sidebar_dark" v-if="sideBarState"></div>
         </transition>
+
     </div>
 </template>
 
-<style lang="scss">
-</style>>
-
+<style lang="scss"></style>

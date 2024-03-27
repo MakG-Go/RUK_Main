@@ -70,6 +70,23 @@
     filter: blur(10px);
 }
 
+.sidebar-acept-enter-active,
+.sidebar-acept-leave-active {
+    transition: 0.3s;
+}
+
+.sidebar-acept-enter-from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(0);
+}
+
+.sidebar-acept-leave-to {
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(0);
+}
+
 /*--------------------------------------*/
 
 .navigation-enter-active,
@@ -92,6 +109,7 @@
 .splash-enter-active {
     animation: close-in 0.25s;
 }
+
 .splash-leave-active {
     animation: close-in 0.5s reverse;
 }
@@ -101,6 +119,7 @@
         opacity: 0;
         clip-path: circle(0 at 50% 50%);
     }
+
     100% {
         opacity: 1;
         clip-path: circle(100%);
